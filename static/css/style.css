@@ -3,6 +3,7 @@
     --text-color: #fff;
     --card-bg: #111;
     --accent-color: #fff;
+    --starlink-glow: #00bfff; /* Блакитний неон для Starlink */
     --shadow: 0 8px 16px rgba(255,255,255,0.1);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -12,6 +13,7 @@
     --text-color: #000;
     --card-bg: #f8f9fa;
     --accent-color: #000;
+    --starlink-glow: #00bfff;
     --shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
@@ -22,15 +24,23 @@ body {
     transition: var(--transition);
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Для анімацій */
 }
 
+/* Підсвічене меню */
 .navbar {
-    background: var(--card-bg);
-    box-shadow: var(--shadow);
+    background: var(--card-bg) !important;
+    box-shadow: var(--shadow), 0 0 20px var(--starlink-glow); /* Неоновий glow */
     position: sticky;
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid var(--text-color);
+    animation: navbarGlow 2s ease-in-out infinite alternate; /* Пульсація */
+}
+
+@keyframes navbarGlow {
+    from { box-shadow: var(--shadow), 0 0 20px var(--starlink-glow); }
+    to { box-shadow: var(--shadow), 0 0 30px var(--starlink-glow); }
 }
 
 .navbar-brand {
@@ -38,37 +48,99 @@ body {
     font-weight: 700;
     font-size: 1.8rem;
     color: var(--accent-color) !important;
+    text-shadow: 0 0 10px var(--starlink-glow); /* Glow на лого */
 }
 
 .nav-link {
     font-weight: 600;
     color: var(--text-color) !important;
     transition: var(--transition);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin: 0 0.25rem;
 }
 
 .nav-link:hover, .nav-link.active {
-    color: var(--accent-color) !important;
-    text-decoration: underline;
+    color: var(--starlink-glow) !important;
+    background: rgba(0, 191, 255, 0.1); /* Легкий фон */
+    text-shadow: 0 0 15px var(--starlink-glow);
     transform: scale(1.05);
+    box-shadow: 0 0 10px var(--starlink-glow);
 }
 
+/* Космічні анімації: Зірковий фон */
+.starry-bg {
+    position: relative;
+    background: var(--bg-color);
+    overflow: hidden;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate, fall 10s linear infinite;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* Орбіта супутника */
+.satellite-orbit {
+    position: relative;
+    display: inline-block;
+}
+
+.satellite {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    animation: orbit 4s linear infinite;
+}
+
+@keyframes orbit {
+    0% { transform: translateX(-50%) rotate(0deg) translateX(100px) rotate(0deg); }
+    100% { transform: translateX(-50%) rotate(360deg) translateX(100px) rotate(-360deg); }
+}
+
+/* Заголовок з анімацією */
 .header {
     padding: 4rem 0;
     text-align: center;
     background: var(--bg-color);
+    position: relative; /* Для overlay анімацій */
 }
 
 .animated-title {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 2.2rem; /* Зменшено з 3rem для кращої адаптивності */
-    max-width: 100%; /* Не вилазить за екран */
+    font-size: 2.2rem;
+    max-width: 100%;
     overflow: hidden;
-    white-space: nowrap; /* Зберігаємо для typing, але додаємо break для довгих */
-    word-break: break-word; /* Переносить слова, якщо не вміщується */
+    white-space: nowrap;
+    word-break: break-word;
     border-right: 3px solid var(--accent-color);
     animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-    margin: 0 auto; /* Центрування */
+    margin: 0 auto;
+    text-shadow: 0 0 10px var(--starlink-glow); /* Glow для космічності */
 }
 
 @keyframes typing {
@@ -91,7 +163,7 @@ body {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(255,255,255,0.15);
+    box-shadow: 0 0 20px var(--starlink-glow); /* Космічний glow на hover */
 }
 
 .stats-card {
@@ -103,6 +175,7 @@ body {
     font-size: 3rem;
     font-weight: 700;
     color: var(--accent-color);
+    text-shadow: 0 0 10px var(--starlink-glow);
 }
 
 footer {
@@ -128,6 +201,7 @@ footer {
     background: var(--card-bg);
     color: var(--text-color);
     border: 1px solid var(--text-color);
+    box-shadow: 0 0 10px var(--starlink-glow);
 }
 
 img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
@@ -137,12 +211,14 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Мобільна — ще менший шрифт */
+/* Мобільна */
 @media (max-width: 768px) {
     .animated-title { 
-        font-size: 1.6rem; /* Зменшено з 2rem */
-        white-space: normal; /* Дозволяємо перенос на мобільному для typing */
-        word-break: break-all; /* Агресивний перенос для вузьких екранів */
+        font-size: 1.6rem;
+        white-space: normal;
+        word-break: break-all;
     }
     .count { font-size: 2rem; }
+    .navbar { animation: none; } /* Вимикаємо пульсацію на мобільному для продуктивності */
+    .star { animation-duration: 15s; } /* Повільніше на мобільному */
 }
