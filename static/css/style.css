@@ -257,3 +257,20 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     .carousel-item img { height: 150px; } /* Зменшено з 200px */
     .carousel-caption { display: none; }
 }
+/* Стилі для фото команди в "Про нас" */
+.team-img {
+    max-width: 600px; /* Компактний розмір для вписування */
+    box-shadow: var(--shadow); /* Тінь з теми */
+    border-radius: 8px; /* Закруглені кути */
+    transition: var(--transition);
+}
+
+.team-img:hover {
+    transform: scale(1.02); /* Легкий зум на hover */
+    box-shadow: 0 0 20px var(--starlink-glow); /* Блакитний glow для акценту */
+}
+
+/* Мобільний — фото повна ширина */
+@media (max-width: 768px) {
+    .team-img { max-width: 100%; }
+}

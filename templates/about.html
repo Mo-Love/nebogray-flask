@@ -11,6 +11,11 @@
                 {% for paragraph in about_text.split('\n\n') %}
                 <p class="lead mb-3">{{ paragraph | safe }}</p>
                 {% endfor %}
+                <!-- Фото команди — центроване, під текстом -->
+                <img src="{{ url_for('static', filename='images/komanda_nebogray.jpeg') }}" 
+                     class="img-fluid rounded mx-auto d-block team-img mb-3" 
+                     alt="Команда Небограй з терміналами Starlink" 
+                     loading="lazy">
             </div>
         </div>
     </div>
