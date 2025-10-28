@@ -113,7 +113,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     font-size: 2rem;
-    animation: orbit 4s linear infinite;
+    animation: orbit 8s linear infinite;
 }
 
 @keyframes orbit {
@@ -140,7 +140,7 @@ body {
     border-right: 3px solid var(--accent-color);
     animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
     margin: 0 auto;
-    text-shadow: 0 0 10px var(--starlink-glow); /* Glow для космічності */
+    /* Прибрано text-shadow для чистоти */
 }
 
 @keyframes typing {
