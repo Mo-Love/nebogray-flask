@@ -162,5 +162,32 @@
         console.log('Particles.js not loaded, using CSS stars fallback');
     }
 </script>
+<script>
+    // ... (інші функції без змін)
+
+    // Анімація лічильників з ">" 
+    function animateCounters() {
+        const counters = document.querySelectorAll('.count');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const increment = target / 50;
+            let current = 0;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                    // Додаємо " >" після завершення (з пробілом для формату "> 2 500")
+                    counter.innerHTML = '> ' + current.toLocaleString();
+                } else {
+                    counter.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 40);
+        });
+    }
+    if (document.getElementById('stats')) animateCounters();
+
+    // ... (решта JS)
+</script>
 </body>
 </html>

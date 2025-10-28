@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    stats = {'reobladnano': 2486, 'vidremontovano': 15078}
+    stats = {'reobladnano': 2500, 'vidremontovano': 17000}  # Округлено до >2500 / >17000
     services = [
         {
             'title': 'Переобладнання StarLink V2 для Вашого авто',
