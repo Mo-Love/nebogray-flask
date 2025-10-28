@@ -7,8 +7,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h2>Про нас</h2>
-                <p>{{ about_text }}</p>
+                <h2 class="mb-4">Про нас</h2>
+                {% for paragraph in about_text.split('\n\n') %}
+                <p class="lead mb-3">{{ paragraph | safe }}</p>
+                {% endfor %}
             </div>
         </div>
     </div>
