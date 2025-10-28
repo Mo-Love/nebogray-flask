@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Подяки - Небограй{% endblock %}
+
+{% block content %}
+<section class="row section">
+    <h2 class="col-12 mb-4 text-center">Подяки від клієнтів</h2>
+    <div class="accordion" id="reviewsAccordion">
+        {% for review in reviews %}
+        <div class="accordion-item bg-transparent border-light">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#review{{ loop.index }}">
+                    {{ review.author }}
+                </button>
+            </h2>
+            <div id="review{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#reviewsAccordion">
+                <div class="accordion-body bg-secondary text-white">
+                    {{ review.text }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

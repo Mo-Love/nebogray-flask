@@ -1,117 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- Статистика -->
+<!-- Статистика з анімацією -->
 <section id="stats" class="row mb-5 text-center section">
     <div class="col-md-6">
-        <div class="card bg-primary text-white">
+        <div class="card stats-card bg-secondary text-white">
             <div class="card-body">
-                <h2><i class="fas fa-tools"></i> Переобладнано: {{ stats.reobladnano }}</h2>
+                <h2><i class="fas fa-tools"></i> Переобладнано:</h2>
+                <div class="count" data-target="{{ stats.reobladnano }}">0</div>
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="card bg-success text-white">
+        <div class="card stats-card bg-secondary text-white">
             <div class="card-body">
-                <h2><i class="fas fa-wrench"></i> Відремонтовано: {{ stats.vidremontovano }}</h2>
+                <h2><i class="fas fa-wrench"></i> Відремонтовано:</h2>
+                <div class="count" data-target="{{ stats.vidremontovano }}">0</div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Послуги -->
-<section id="services" class="row mb-5 section">
+<section class="row mb-5 section">
     {% for service in services %}
     <div class="col-md-6 mb-4">
         <div class="card h-100">
-            <img src="https://source.unsplash.com/600x400/?starlink,car" class="card-img-top" alt="{{ service.title }}">
-            <div class="card-header bg-info text-white">
+            <div class="card-header bg-dark text-white">
                 <h5>{{ service.title }}</h5>
             </div>
             <div class="card-body">
                 <p>{{ service.description }}</p>
-                <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#details{{ loop.index }}">Деталі <i class="fas fa-chevron-down"></i></button>
+                <button class="btn btn-outline-light" data-bs-toggle="collapse" data-bs-target="#details{{ loop.index }}">Деталі</button>
                 <div class="collapse mt-3" id="details{{ loop.index }}">
                     <ul class="list-group list-group-flush">
                         {% for detail in service.details %}
-                        <li class="list-group-item"><i class="fas fa-check text-success"></i> {{ detail }}</li>
+                        <li class="list-group-item bg-transparent text-white"><i class="fas fa-check"></i> {{ detail }}</li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-outline-primary">Замовити</a>
-            </div>
         </div>
     </div>
     {% endfor %}
-</section>
-
-<!-- PoE-інжектори -->
-<section id="poe" class="row mb-5 section">
-    <h2 class="col-12 mb-4 text-center">PoE інжектори для STARLINKів</h2>
-    {% for injector in poe_injectors %}
-    <div class="col-md-4 mb-4">
-        <div class="card">
-            <img src="https://source.unsplash.com/400x300/?poe,injector" class="card-img-top" alt="{{ injector.model }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ injector.model }} – {{ injector.power }}</h5>
-                <p class="card-text">{{ injector.description }}</p>
-                <ul class="list-unstyled">
-                    {% for feature in injector.features %}
-                    <li><i class="fas fa-bolt text-warning"></i> {{ feature }}</li>
-                    {% endfor %}
-                </ul>
-                <p class="fw-bold">Ціна: {{ injector.price }}</p>
-                <a href="#" class="btn btn-primary">Купити</a>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</section>
-
-<!-- Кабель -->
-<section class="row mb-5 section justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <img src="https://source.unsplash.com/600x300/?cable,ethernet" class="card-img-top" alt="{{ cable.model }}">
-            <div class="card-body text-center">
-                <h5>{{ cable.model }} – {{ cable.description }}</h5>
-                <ul class="list-unstyled">
-                    {% for feature in cable.features %}
-                    <li><i class="fas fa-plug text-info"></i> {{ feature }}</li>
-                    {% endfor %}
-                </ul>
-                <p class="fw-bold">Ціна: {{ cable.price }}</p>
-                <a href="#" class="btn btn-success">Додати в кошик</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Відгуки -->
-<section id="reviews" class="row mb-5 section">
-    <h2 class="col-12 mb-4 text-center">Відгуки клієнтів</h2>
-    <div class="accordion" id="reviewsAccordion">
-        {% for review in reviews %}
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#review{{ loop.index }}">
-                    {{ review.author }}
-                </button>
-            </h2>
-            <div id="review{{ loop.index }}" class="accordion-collapse collapse show" data-bs-parent="#reviewsAccordion">
-                <div class="accordion-body">
-                    {{ review.text }}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</section>
-
-<section id="contacts" class="row mb-5 section text-center">
-    <h2>Контакти</h2>
-    <p>Зв'яжіться з нами: info@nebogray.com | +380 XX XXX XX XX</p>
 </section>
 {% endblock %}
