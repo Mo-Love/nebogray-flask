@@ -2,7 +2,7 @@
 
 {% block content %}
 <!-- Статистика -->
-<section class="row mb-5 text-center">
+<section id="stats" class="row mb-5 text-center section">
     <div class="col-md-6">
         <div class="card bg-primary text-white">
             <div class="card-body">
@@ -20,10 +20,11 @@
 </section>
 
 <!-- Послуги -->
-<section class="row mb-5">
+<section id="services" class="row mb-5 section">
     {% for service in services %}
     <div class="col-md-6 mb-4">
         <div class="card h-100">
+            <img src="https://source.unsplash.com/600x400/?starlink,car" class="card-img-top" alt="{{ service.title }}">
             <div class="card-header bg-info text-white">
                 <h5>{{ service.title }}</h5>
             </div>
@@ -47,18 +48,21 @@
 </section>
 
 <!-- PoE-інжектори -->
-<section class="row mb-5">
-    <h2 class="col-12 mb-4 text-center">PoE-інжектори</h2>
+<section id="poe" class="row mb-5 section">
+    <h2 class="col-12 mb-4 text-center">PoE інжектори для STARLINKів</h2>
     {% for injector in poe_injectors %}
     <div class="col-md-4 mb-4">
         <div class="card">
+            <img src="https://source.unsplash.com/400x300/?poe,injector" class="card-img-top" alt="{{ injector.model }}">
             <div class="card-body">
-                <h5 class="card-title">{{ injector.model }}</h5>
+                <h5 class="card-title">{{ injector.model }} – {{ injector.power }}</h5>
+                <p class="card-text">{{ injector.description }}</p>
                 <ul class="list-unstyled">
-                    <li><strong>Потужність:</strong> {{ injector.power }}</li>
-                    <li><strong>Порти:</strong> {{ injector.ports }}</li>
-                    <li><strong>Ціна:</strong> {{ injector.price }}</li>
+                    {% for feature in injector.features %}
+                    <li><i class="fas fa-bolt text-warning"></i> {{ feature }}</li>
+                    {% endfor %}
                 </ul>
+                <p class="fw-bold">Ціна: {{ injector.price }}</p>
                 <a href="#" class="btn btn-primary">Купити</a>
             </div>
         </div>
@@ -67,12 +71,18 @@
 </section>
 
 <!-- Кабель -->
-<section class="row mb-5 justify-content-center">
-    <div class="col-md-6">
+<section class="row mb-5 section justify-content-center">
+    <div class="col-md-8">
         <div class="card">
+            <img src="https://source.unsplash.com/600x300/?cable,ethernet" class="card-img-top" alt="{{ cable.model }}">
             <div class="card-body text-center">
-                <h5>Оригінальний кабель {{ cable.model }}</h5>
-                <p><strong>Довжина:</strong> {{ cable.length }} | <strong>Тип:</strong> {{ cable.type }} | <strong>Ціна:</strong> {{ cable.price }}</p>
+                <h5>{{ cable.model }} – {{ cable.description }}</h5>
+                <ul class="list-unstyled">
+                    {% for feature in cable.features %}
+                    <li><i class="fas fa-plug text-info"></i> {{ feature }}</li>
+                    {% endfor %}
+                </ul>
+                <p class="fw-bold">Ціна: {{ cable.price }}</p>
                 <a href="#" class="btn btn-success">Додати в кошик</a>
             </div>
         </div>
@@ -80,7 +90,7 @@
 </section>
 
 <!-- Відгуки -->
-<section class="row mb-5">
+<section id="reviews" class="row mb-5 section">
     <h2 class="col-12 mb-4 text-center">Відгуки клієнтів</h2>
     <div class="accordion" id="reviewsAccordion">
         {% for review in reviews %}
@@ -92,11 +102,16 @@
             </h2>
             <div id="review{{ loop.index }}" class="accordion-collapse collapse show" data-bs-parent="#reviewsAccordion">
                 <div class="accordion-body">
-                    "{{ review.text }}"
+                    {{ review.text }}
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+</section>
+
+<section id="contacts" class="row mb-5 section text-center">
+    <h2>Контакти</h2>
+    <p>Зв'яжіться з нами: info@nebogray.com | +380 XX XXX XX XX</p>
 </section>
 {% endblock %}
