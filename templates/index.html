@@ -46,14 +46,14 @@
                         {% endfor %}
                     </ul>
                 </div>
-                <!-- Карусель фото тільки для першої послуги (переобладнання для авто) — 4 фото, без першого -->
+                <!-- Карусель для першої послуги (переобладнання) -->
                 {% if loop.index == 1 %}
-                <div id="carouselServices{{ loop.index }}" class="carousel slide mt-3" data-bs-ride="carousel">
+                <div id="carouselServices1" class="carousel slide mt-3" data-bs-ride="carousel">
                     <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselServices{{ loop.index }}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselServices{{ loop.index }}" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselServices{{ loop.index }}" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselServices{{ loop.index }}" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="3" aria-label="Slide 4"></button>
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -81,11 +81,49 @@
                             </div>
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselServices{{ loop.index }}" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselServices1" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselServices{{ loop.index }}" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselServices1" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                {% endif %}
+                <!-- Карусель для другої послуги (ремонт) — 3 фото -->
+                {% if loop.index == 2 %}
+                <div id="carouselServices2" class="carousel slide mt-3" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ url_for('static', filename='images/pererobka_rozyemu_starlink_rj45.jpg') }}" class="d-block w-100" alt="Переробка роз'єму Starlink RJ45" loading="lazy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Переробка роз'єму</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ url_for('static', filename='images/remont_poshkodjenoyi_plati_starlink.jpg') }}" class="d-block w-100" alt="Ремонт пошкодженої плати Starlink" loading="lazy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Ремонт плати</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ url_for('static', filename='images/zamina_korpusu_starlink.jpg') }}" class="d-block w-100" alt="Заміна корпусу Starlink" loading="lazy">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Заміна корпусу</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselServices2" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselServices2" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
