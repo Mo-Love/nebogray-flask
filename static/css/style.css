@@ -222,3 +222,39 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     .navbar { animation: none; } /* Вимикаємо пульсацію на мобільному для продуктивності */
     .star { animation-duration: 15s; } /* Повільніше на мобільному */
 }
+/* Стилі для каруселі — сучасний космічний вайб */
+.carousel-item img {
+    height: 300px; /* Фіксована висота для уніфікації */
+    object-fit: cover; /* Обрізає фото для квадратності */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.carousel-item img:hover {
+    transform: scale(1.05); /* Легкий зум на hover */
+    box-shadow: 0 0 20px #00bfff; /* Блакитний glow для Starlink */
+}
+
+.carousel-caption {
+    background: rgba(0,0,0,0.5); /* Напівпрозорий overlay */
+    border-radius: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1); /* Білий колір для темної теми */
+    background-image: none; /* Кастомні стрілки, якщо хочеш */
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #00bfff; /* Блакитні точки */
+}
+
+/* Мобільний */
+@media (max-width: 768px) {
+    .carousel-item img { height: 200px; }
+    .carousel-caption { display: none; } /* Ховаємо підписи на мобільному */
+}
