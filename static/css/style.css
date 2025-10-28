@@ -61,11 +61,14 @@ body {
 .animated-title {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2.2rem; /* Зменшено з 3rem для кращої адаптивності */
+    max-width: 100%; /* Не вилазить за екран */
     overflow: hidden;
-    white-space: nowrap;
+    white-space: nowrap; /* Зберігаємо для typing, але додаємо break для довгих */
+    word-break: break-word; /* Переносить слова, якщо не вміщується */
     border-right: 3px solid var(--accent-color);
     animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    margin: 0 auto; /* Центрування */
 }
 
 @keyframes typing {
@@ -134,8 +137,12 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Мобільна */
+/* Мобільна — ще менший шрифт */
 @media (max-width: 768px) {
-    .animated-title { font-size: 2rem; }
+    .animated-title { 
+        font-size: 1.6rem; /* Зменшено з 2rem */
+        white-space: normal; /* Дозволяємо перенос на мобільному для typing */
+        word-break: break-all; /* Агресивний перенос для вузьких екранів */
+    }
     .count { font-size: 2rem; }
 }
