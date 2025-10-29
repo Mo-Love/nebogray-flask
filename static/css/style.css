@@ -203,7 +203,7 @@ body {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px var(--starlink-glow);
+    box-shadow: 0 0 20px var cumpr(starlink-glow);
     background: rgba(17, 17, 17, 0.6);
 }
 
