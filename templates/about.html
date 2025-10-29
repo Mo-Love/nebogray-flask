@@ -11,13 +11,11 @@
                 {% for paragraph in about_text.split('\n\n') %}
                 <p class="lead mb-3">{{ paragraph | safe }}</p>
                 {% endfor %}
-                <!-- Фото команди -->
                 <img src="{{ url_for('static', filename='images/komanda_nebogray.jpeg') }}" 
                      class="img-fluid rounded mx-auto d-block team-img mb-3" 
                      alt="Команда Небограй з терміналами Starlink" 
                      loading="lazy">
-                <!-- 3D-модель під фото -->
-                <model-viewer src="{{ url_for('static', filename='3D_gltf_models/repair_model.gltf') }}" 
+                <model-viewer src="{{ url_for('static', filename=models.repair.file) }}" 
                               alt="3D-модель ремонту Starlink" 
                               auto-rotate 
                               camera-controls 
