@@ -71,7 +71,10 @@
                 }, 40);
             });
         }
-        if (document.getElementById('stats')) animateCounters();
+        // Запускаємо після повного завантаження DOM
+        window.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('stats')) animateCounters();
+        });
         function createStars() {
             const starsContainer = document.getElementById('stars');
             if (!starsContainer) return;
@@ -84,7 +87,7 @@
                     star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
                     star.style.animationDelay = Math.random() * 10 + 's';
                     star.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                    starsContainer APPEND(star);
+                    starsContainer.appendChild(star);
                 }
             }
         }
@@ -99,56 +102,5 @@
             }
         });
     </script>
-<script>
-    function toggleTheme() {
-        const body = document.body;
-        body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
-    }
-    function animateCounters() {
-        const counters = document.querySelectorAll('.count');
-        counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const increment = target / 50;
-            let current = 0;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                    counter.innerHTML = '> ' + current.toLocaleString();
-                } else {
-                    counter.textContent = Math.floor(current).toLocaleString();
-                }
-            }, 40);
-        });
-    }
-    if (document.getElementById('stats')) animateCounters();
-    function createStars() {
-        const starsContainer = document.getElementById('stars');
-        if (!starsContainer) return;
-        if (typeof particlesJS === 'undefined') {
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
-                star.style.animationDelay = Math.random() * 10 + 's';
-                star.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                starsContainer.appendChild(star); // Виправлено APPEND на appendChild
-            }
-        }
-    }
-    createStars();
-    window.addEventListener('load', () => {
-        if (typeof particlesJS !== 'undefined' && window.location.pathname === '/') {
-            particlesJS('stars', {
-                particles: { number: { value: 80 }, color: { value: '#fff' }, shape: { type: 'circle' }, opacity: { value: 0.5, random: true }, size: { value: 2, random: true }, line_linked: { enable: false }, move: { enable: true, speed: 1, direction: 'none', random: true, out_mode: 'out' } },
-                interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } },
-                retina_detect: true
-            });
-        }
-    });
-</script>
 </body>
 </html>
