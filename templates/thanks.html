@@ -24,8 +24,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <!-- 3D-модель біля відгуків -->
-        <model-viewer src="{{ url_for('static', filename='3D_gltf_models/auto_mod.gltf') }}" 
+        <model-viewer src="{{ url_for('static', filename=models.auto.file) }}" 
                       alt="3D-модель для авто" 
                       auto-rotate 
                       camera-controls 
