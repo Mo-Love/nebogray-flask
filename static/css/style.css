@@ -27,6 +27,35 @@ body {
     overflow-x: hidden;
 }
 
+/* Прелоадер */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.preloader-star {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--starlink-glow);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Підсвічене меню */
 .navbar {
     background: var(--card-bg) !important;
@@ -49,6 +78,11 @@ body {
     font-size: 1.8rem;
     color: var(--accent-color) !important;
     text-shadow: 0 0 10px var(--starlink-glow);
+}
+
+.navbar-brand i {
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
 }
 
 .nav-link {
@@ -123,7 +157,7 @@ body {
     font-size: 2rem;
 }
 
-/* Космічні анімації: Зірковий фон — обмежено по висоті */
+/* Космічні анімації: Зірковий фон */
 .starry-bg {
     position: relative;
     background: var(--bg-color);
@@ -165,8 +199,17 @@ body {
 }
 
 .satellite {
-    transition: transform 0.1s;
+    position: absolute;
+    top: -2rem;
+    left: -2rem;
     font-size: 2rem;
+    animation: orbit 6s linear infinite; /* Відновлено орбіту */
+}
+
+/* Анімація орбіти */
+@keyframes orbit {
+    0% { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
 }
 
 /* Загальні стилі */
@@ -275,4 +318,6 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     .carousel-item img { height: 150px; }
     .carousel-caption { display: none; }
     .header { min-height: 50vh; }
+    .satellite { font-size: 1.5rem; top: -1.5rem; left: -1.5rem; }
+    .preloader-star { width: 40px; height: 40px; }
 }
