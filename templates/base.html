@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body data-theme="dark">
-    <!-- Прелоадер з відео — грає перед завантаженням -->
+    <!-- Прелоадер з відео + fallback -->
     <div id="preloader" class="preloader">
-        <video id="preload-video" autoplay muted loop playsinline>
+        <video id="preload-video" autoplay muted loop playsinline 
+               poster="{{ url_for('static', filename='672860EC-E2ED-4E3D-A21A-3A2ADEA9CA58.png') }}">
             <source src="{{ url_for('static', filename='Grok-Video-878D407B-6744-4F80-BF3089D3B648.mov') }}" type="video/mp4">
             Ваш браузер не підтримує відео.
         </video>
@@ -83,9 +84,22 @@
                 }, 40);
             });
         }
+        function hidePreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+        }
+        // Ховаємо прелоадер після завантаження сторінки
         window.addEventListener('DOMContentLoaded', () => {
             if (document.getElementById('stats')) animateCounters();
+            // Гарантуємо, що прелоадер зникне через 3с, навіть якщо відео не завантажиться
+            setTimeout(hidePreloader, 3000);
         });
+        window.addEventListener('load', hidePreloader);
         function createStars() {
             const starsContainer = document.getElementById('stars');
             if (!starsContainer) return;
@@ -102,6 +116,8 @@
                 }
             }
         }
+       ස
+
         createStars();
         window.addEventListener('load', () => {
             if (typeof particlesJS !== 'undefined' && window.location.pathname === '/') {
@@ -110,16 +126,6 @@
                     interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } },
                     retina_detect: true
                 });
-            }
-        });
-        // Прелоадер — зникає після завантаження
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 500);
             }
         });
     </script>
