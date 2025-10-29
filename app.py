@@ -3,9 +3,16 @@ import os
 
 app = Flask(__name__)
 
+# Дані для 3D-моделей (з репозиторію)
+models = {
+    'terminal': {'name': 'Starlink V2 Термінал', 'file': 'starlink_terminal.gltf', 'desc': 'Базова модель для ремонту.'},
+    'auto': {'name': 'Для авто', 'file': 'auto_mod.gltf', 'desc': 'Модифікація з магнітами.'},
+    'repair': {'name': 'Ремонт', 'file': 'repair_model.gltf', 'desc': 'Модель з заміною корпусу.'}
+}
+
 @app.route('/')
 def index():
-    stats = {'reobladnano': 2500, 'vidremontovano': 17000}  # Округлено до >2500 / >17000
+    stats = {'reobladnano': 2500, 'vidremontovano': 17000}
     services = [
         {
             'title': 'Переобладнання StarLink V2 для Вашого авто',
@@ -23,7 +30,7 @@ def index():
         {'author': 'Петро Качур', 'text': '“Ваші майстри дуже якісно переобладнали мій старлінк під мій автомобіль. Термінал працює бездоганно, а я маю швидкісний інтернет тепер навіть далеко в горах. Дуже зручний девайс для тих хто любить відпочивати на природі та бути завжди з якісним інтернетом!”'},
         {'author': 'Лілія Степанко', 'text': '“Наша компанія займається пасажирськими перевезеннями в Європу. Команада Небограй обладнала 5 наших автобусів терміналами Старлінк і тепер пасажири на протязі всієї подорожі мають змогу мати інтернет з швідкістю від 100 Мб. Клієнти приємно вражені таким сервісом та рекомендують тепер тільки нас.”'}
     ]
-    return render_template('index.html', stats=stats, services=services, reviews=reviews)
+    return render_template('index.html', stats=stats, services=services, models=models, reviews=reviews)
 
 @app.route('/about')
 def about():
@@ -38,7 +45,7 @@ def about():
     
     Наша мета – забезпечити нашим клієнтам надійний та безперебійний супутниковий зв’язок, щоб вони могли користуватися своїми терміналами без будь-яких перешкод.
     """
-    return render_template('about.html', about_text=about_text)
+    return render_template('about.html', about_text=about_text, models=models)
 
 @app.route('/contacts')
 def contacts():
@@ -47,7 +54,7 @@ def contacts():
         'phone': '+38 067 444 81 81 (Signal, WhatsApp)',
         'email': 'nebogray@gmail.com'
     }
-    return render_template('contacts.html', contacts=contacts)
+    return render_template('contacts.html', contacts=contacts, models=models)
 
 @app.route('/thanks')
 def thanks():
@@ -56,7 +63,7 @@ def thanks():
         {'author': 'Петро Качур', 'text': '“Ваші майстри дуже якісно переобладнали мій старлінк під мій автомобіль. Термінал працює бездоганно, а я маю швидкісний інтернет тепер навіть далеко в горах. Дуже зручний девайс для тих хто любить відпочивати на природі та бути завжди з якісним інтернетом!”'},
         {'author': 'Лілія Степанко', 'text': '“Наша компанія займається пасажирськими перевезеннями в Європу. Команада Небограй обладнала 5 наших автобусів терміналами Старлінк і тепер пасажири на протязі всієї подорожі мають змогу мати інтернет з швідкістю від 100 Мб. Клієнти приємно вражені таким сервісом та рекомендують тепер тільки нас.”'}
     ]
-    return render_template('thanks.html', reviews=reviews)
+    return render_template('thanks.html', reviews=reviews, models=models)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
