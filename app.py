@@ -12,7 +12,7 @@ models = {
 
 @app.route('/')
 def index():
-    stats = {'reobladnano': 2500, 'vidremontovano': 17000}  # Fallback: якщо JS fail, покажи статично
+    stats = {'reobladnano': 2500, 'vidremontovano': 17000}
     services = [
         {
             'title': 'Переобладнання StarLink V2 для Вашого авто',
