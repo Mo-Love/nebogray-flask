@@ -143,15 +143,14 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
-    </script>
-// Parallax для 3D-фону при скролі
-window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const bgModel = document.getElementById('hero-model');  // ID з hero
-    if (bgModel) {
-        bgModel.style.transform = `translateY(${scrolled * 0.3}px) rotateY(${scrolled * 0.1}deg)`;
-    }
-    // ... (інші parallax)
+    const bgModel = document.getElementById('hero-model');
+    if (bgModel) bgModel.style.transform = `translateY(${scrolled * 0.3}px) rotateY(${scrolled * 0.1}deg)`;
+    const satellite = document.querySelector('.satellite');
+    if (satellite) satellite.style.transform = `translateY(${scrolled * 0.5}px)`;
+    </script>
+
 });
 </body>
 </html>
