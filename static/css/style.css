@@ -29,6 +29,37 @@ body {
     backdrop-filter: blur(10px); /* Напівпрозорий blur для Grok-вайбу */
 }
 
+/* Орбіта супутника — стабільніша, як реальна Starlink-траєкторія */
+.satellite-orbit {
+    position: relative;
+    display: inline-block;
+}
+
+.satellite {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: var(--starlink-glow); /* Блакитний для акценту */
+    animation: orbit 4s linear infinite; /* Infinite linear — без глюків */
+    z-index: 10; /* Над заголовком */
+}
+
+@keyframes orbit {
+    0% { 
+        transform: translateX(-50%) rotate(0deg) translateX(100px) rotate(0deg) scale(1); 
+    }
+    100% { 
+        transform: translateX(-50%) rotate(360deg) translateX(100px) rotate(-360deg) scale(1.1); /* Легкий scale для динаміки */
+    }
+}
+
+/* Фікс для particles — не конфліктує з орбітою */
+.stars {
+    z-index: 1; /* Під супутником */
+}
+
 /* Меню — строгіший, з прозорістю */
 .navbar {
     background: rgba(0, 0, 0, 0.8) !important; /* Напівпрозорий */
