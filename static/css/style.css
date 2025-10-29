@@ -39,7 +39,7 @@ body {
     z-index: 9999;
     background: #000;
     opacity: 1;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 1s ease-in-out; /* Плавніший перехід */
 }
 
 #preload-video {
@@ -48,8 +48,46 @@ body {
     left: 50%;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Змінено на contain для компактності */
     transform: translate(-50%, -50%);
+}
+
+/* Кнопка переключення теми */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2); /* Світліший фон */
+    color: var(--accent-color);
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Контрастний бордер */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 1001;
+    box-shadow: 0 0 10px var(--starlink-glow);
+}
+
+[data-theme="light"] .theme-toggle {
+    background: rgba(0, 0, 0, 0.2); /* Темніший для світлої теми */
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--starlink-glow);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem; /* Збільшена іконка */
 }
 
 /* Меню */
@@ -237,5 +275,13 @@ body {
     }
     .navbar-brand {
         font-size: 1.5rem;
+    }
+    #preload-video {
+        max-width: 80%; /* Компактніше для мобільних */
+        max-height: 60%;
+    }
+    .theme-toggle {
+        width: 36px; /* Трохи менший для мобільних */
+        height: 36px;
     }
 }
