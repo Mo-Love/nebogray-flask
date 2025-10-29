@@ -316,37 +316,42 @@ body {
     100% { transform: translateY(100vh) rotate(360deg); }
 }
 
-/* Заголовок з анімацією — вища позиція */
+/* Заголовок з анімацією — з переносами */
 .header {
-    padding: 2.5rem 0; /* Зменшено з 4rem для підняття */
+    padding: 2rem 0; /* Зменшено з 2.5rem для підняття */
     text-align: center;
     background: var(--bg-color);
     position: relative;
-    min-height: 50vh; /* Фіксована мінімальна висота для десктопу */
+    min-height: 40vh; /* Зменшено для компактності */
 }
 
 .satellite-orbit {
     position: relative;
     display: inline-block;
-    margin-top: -1rem; /* Піднімає заголовок */
+    margin-top: -0.5rem; /* Піднімає заголовок */
 }
 
 .animated-title {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 2.2rem;
+    font-size: 2rem; /* Зменшено з 2.2rem для вписування */
+    line-height: 1.2; /* Компактні рядки */
     max-width: 100%;
     overflow: hidden;
-    white-space: nowrap;
-    word-break: break-word;
+    white-space: pre-wrap; /* Дозволяє <br> та перенос */
     border-right: 3px solid var(--accent-color);
-    animation: typing 3.5s steps(60, end), blink-caret 0.75s step-end infinite; /* Більше steps для довшого тексту */
+    animation: typing 4s steps(70, end), blink-caret 0.75s step-end infinite; /* Більше steps для довшого тексту з <br> */
     margin: 0 auto;
+    display: block; /* Для центрування з <br> */
 }
 
-/* Мобільний — без змін */
+/* Мобільний — ще компактніше */
 @media (max-width: 768px) {
-    .stars { height: 80vh; } /* Менше на мобільному */
-    .header { padding: 2rem 0; min-height: 40vh; }
-    .animated-title { font-size: 1.6rem; animation: typing 3s steps(50, end); }
+    .animated-title { 
+        font-size: 1.4rem; /* Зменшено з 1.6rem */
+        line-height: 1.1;
+        animation: typing 3.5s steps(60, end);
+        white-space: normal; /* Повний перенос на мобільному */
+    }
+    .header { padding: 1.5rem 0; min-height: 35vh; }
 }
