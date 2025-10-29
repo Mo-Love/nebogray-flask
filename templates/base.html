@@ -131,5 +131,28 @@
             }
         });
     </script>
+<script>
+    // ... (інші функції)
+
+    // Генерація зірок — менше на десктопі
+    function createStars() {
+        const starsContainer = document.getElementById('stars') || document.querySelector('.starry-bg');
+        if (!starsContainer) return;
+        const numStars = window.innerWidth > 768 ? 30 : 20;  // 30 на десктопі, 20 на мобільному
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+            star.style.animationDelay = Math.random() * 10 + 's';
+            star.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+    createStars();
+
+    // ... (решта JS)
+</script>
 </body>
 </html>
