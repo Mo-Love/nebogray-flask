@@ -57,14 +57,14 @@ body {
 }
 
 .nebogray-logo {
-    height: 40px; /* Розмір для десктопу */
-    margin-right: 10px; /* Відступ від тексту */
+    height: 24px; /* Зменшено з 40px */
+    margin-right: 8px; /* Зменшено з 10px */
     transition: var(--transition);
 }
 
 .nebogray-logo:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0 0 10px var(--starlink-glow)); /* Glow як на Starlink */
+    filter: drop-shadow(0 0 10px var(--starlink-glow));
 }
 
 .nav-link {
@@ -210,6 +210,9 @@ body {
     .carousel-item img { height: 150px; }
     .carousel-caption { display: none; }
     .nebogray-logo {
-        height: 30px; /* Менший розмір для мобільних */
+        height: 20px; /* Зменшено з 30px */
+    }
+    .navbar-brand {
+        font-size: 1.5rem; /* Зменшено для мобільних */
     }
 }
