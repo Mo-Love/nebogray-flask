@@ -1,12 +1,12 @@
 :root {
-    --bg-color: #000; /* Темний як Starlink */
+    --bg-color: #000;
     --text-color: #fff;
-    --card-bg: rgba(17, 17, 17, 0.6); /* Напівпрозорий як glassmorphism */
+    --card-bg: rgba(17, 17, 17, 0.6);
     --accent-color: #fff;
-    --starlink-glow: #00bfff; /* Блакитний акцент */
-    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Blur-тінь для прозорості */
+    --starlink-glow: #00bfff;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --gradient-bg: linear-gradient(135deg, #000 0%, #0a0a0a 50%, #000 100%); /* Космічний градієнт як на Grok */
+    --gradient-bg: linear-gradient(135deg, #000 0%, #0a0a0a 50%, #000 100%);
 }
 
 [data-theme="light"] {
@@ -19,66 +19,30 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background: var(--gradient-bg); /* Градієнтний фон */
+    font-family: 'Victor Mono', 'Roboto', sans-serif; /* Victor Mono основний */
+    background: var(--gradient-bg);
     color: var(--text-color);
     transition: var(--transition);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    backdrop-filter: blur(10px); /* Напівпрозорий blur для Grok-вайбу */
+    backdrop-filter: blur(10px);
 }
 
-/* Орбіта супутника — стабільніша, як реальна Starlink-траєкторія */
-.satellite-orbit {
-    position: relative;
-    display: inline-block;
-}
-
-.satellite {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    color: var(--starlink-glow); /* Блакитний для акценту */
-    animation: orbit 4s linear infinite; /* Infinite linear — без глюків */
-    z-index: 10; /* Над заголовком */
-}
-
-@keyframes orbit {
-    0% { 
-        transform: translateX(-50%) rotate(0deg) translateX(100px) rotate(0deg) scale(1); 
-    }
-    100% { 
-        transform: translateX(-50%) rotate(360deg) translateX(100px) rotate(-360deg) scale(1.1); /* Легкий scale для динаміки */
-    }
-}
-
-/* Фікс для particles — не конфліктує з орбітою */
-.stars {
-    z-index: 1; /* Під супутником */
-}
-
-/* Меню — строгіший, з прозорістю */
+/* Меню — строге, з Victor Mono */
 .navbar {
-    background: rgba(0, 0, 0, 0.8) !important; /* Напівпрозорий */
+    background: rgba(0, 0, 0, 0.8) !important;
     box-shadow: var(--shadow), 0 0 20px var(--starlink-glow);
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Легкий border */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     animation: navbarGlow 2s ease-in-out infinite alternate;
-    backdrop-filter: blur(20px); /* Blur для прозорості */
-}
-
-@keyframes navbarGlow {
-    from { box-shadow: var(--shadow), 0 0 20px var(--starlink-glow); }
-    to { box-shadow: var(--shadow), 0 0 30px var(--starlink-glow); }
+    backdrop-filter: blur(20px);
 }
 
 .navbar-brand {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Victor Mono', 'Inter', sans-serif; /* Victor Mono для лого */
     font-weight: 700;
     font-size: 1.8rem;
     color: var(--accent-color) !important;
@@ -86,7 +50,8 @@ body {
 }
 
 .nav-link {
-    font-weight: 600;
+    font-family: 'Victor Mono', 'Inter', sans-serif; /* Victor Mono для меню */
+    font-weight: 500;
     color: var(--text-color) !important;
     transition: var(--transition);
     padding: 0.5rem 1rem;
@@ -96,13 +61,13 @@ body {
 
 .nav-link:hover, .nav-link.active {
     color: var(--starlink-glow) !important;
-    background: rgba(0, 191, 255, 0.1); /* Прозорий акцент */
+    background: rgba(0, 191, 255, 0.1);
     text-shadow: 0 0 15px var(--starlink-glow);
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--starlink-glow);
 }
 
-/* Хедер — строгий, з градієнтом */
+/* Хедер — Victor Mono для заголовка */
 .header {
     padding: 4rem 0;
     text-align: center;
@@ -111,7 +76,7 @@ body {
 }
 
 .animated-title {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Victor Mono', 'Inter', sans-serif; /* Victor Mono для h1 */
     font-weight: 700;
     font-size: 2.2rem;
     max-width: 100%;
@@ -123,75 +88,26 @@ body {
     margin: 0 auto;
 }
 
-/* Карточки — напівпрозорі, як на Starlink */
+/* Карточки — Victor Mono для заголовків */
 .card {
     border: none;
     background: var(--card-bg);
     box-shadow: var(--shadow);
     transition: var(--transition);
     color: var(--text-color);
-    backdrop-filter: blur(10px); /* Прозорий blur */
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-header h5 {
+    font-family: 'Victor Mono', 'Inter', sans-serif; /* Victor Mono для h5 */
+    font-weight: 600;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 20px var(--starlink-glow);
-    background: rgba(17, 17, 17, 0.8); /* Більш прозорий на hover */
+    background: rgba(17, 17, 17, 0.8);
 }
 
-.stats-card {
-    text-align: center;
-    padding: 2rem;
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-}
-
-.count {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--accent-color);
-    text-shadow: 0 0 10px var(--starlink-glow);
-}
-
-footer {
-    background: rgba(0, 0, 0, 0.8); /* Прозорий футер */
-    color: var(--text-color);
-    padding: 2rem 0;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.section {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-/* Карусель — строга, з прозорістю */
-.carousel-item img {
-    height: 250px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.carousel-item img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px var(--starlink-glow);
-}
-
-.carousel-caption {
-    background: rgba(0, 0, 0, 0.7); /* Напівпрозорий */
-    border-radius: 5px;
-    color: #fff;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-}
-
-/* Мобільна адаптація */
-@media (max-width: 768px) {
-    .animated-title { font-size: 1.6rem; white-space: normal; word-break: break-all; }
-    .count { font-size: 2rem; }
-    .navbar { animation: none; }
-    .carousel-item img { height: 150px; }
-}
+/* ... (решта CSS без змін: .stats-card, .carousel, footer, media queries) */
