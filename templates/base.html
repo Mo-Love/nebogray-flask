@@ -15,7 +15,7 @@
         <img src="{{ url_for('static', filename='IMG_0093.gif') }}" alt="Завантаження..." class="preloader-img">
     </div>
 
-    <!-- Кнопка зміни теми -->
+    <!-- Кнопка зміни теми (вище z-index) -->
     <button class="btn theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
 
     <!-- Navbar з написом "Небограй" -->
@@ -128,7 +128,7 @@
                 });
             });
 
-            // Дебаг: перевірка напису та кнопки
+            // Дебаг: перевірка елементів
             const navbarText = document.querySelector('.navbar-text');
             if (navbarText) {
                 console.log('Navbar text loaded: Небограй');
@@ -137,9 +137,15 @@
             }
             const themeToggle = document.querySelector('.theme-toggle');
             if (themeToggle) {
-                console.log('Theme toggle button loaded');
+                console.log('Theme toggle loaded');
             } else {
-                console.log('Theme toggle button not found');
+                console.log('Theme toggle not found');
+            }
+            const satellite = document.querySelector('.satellite');
+            if (satellite) {
+                console.log('Satellite loaded and animated');
+            } else {
+                console.log('Satellite not found');
             }
         });
     </script>
