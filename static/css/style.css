@@ -52,7 +52,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Navbar */
 .navbar {
     background: var(--card-bg) !important;
     box-shadow: var(--shadow), 0 0 20px var(--starlink-glow);
@@ -78,7 +77,8 @@ body {
     vertical-align: middle;
 }
 
-.navbar-brand:hover .navbar-logo, .navbar-brand:hover .navbar-text {
+.navbar-brand:hover .navbar-logo,
+.navbar-brand:hover .navbar-text {
     transform: scale(1.05);
     filter: drop-shadow(0 0 10px var(--starlink-glow));
 }
@@ -105,7 +105,6 @@ body {
     box-shadow: 0 0 10px var(--starlink-glow);
 }
 
-/* Hero */
 .header {
     padding: 2rem 0;
     text-align: center;
@@ -114,13 +113,13 @@ body {
     min-height: 60vh;
     display: flex;
     align-items: center;
-    overflow: hidden;  /* Фікс "пливучих" стилів */
+    overflow: hidden;
     z-index: 1;
 }
 
 .hero-content {
     animation: fadeInUp 1s ease-out;
-    z-index: 2;  /* Над фоном */
+    z-index: 2;
 }
 
 .hero-subtitle {
@@ -164,7 +163,6 @@ body {
     font-size: 2rem;
 }
 
-/* Зірки */
 .starry-bg {
     position: relative;
     background: var(--bg-color);
@@ -199,7 +197,6 @@ body {
     100% { transform: translateY(100vh) rotate(360deg); }
 }
 
-/* Супутник */
 .satellite-orbit {
     position: relative;
     display: inline-block;
@@ -211,14 +208,13 @@ body {
     font-size: 2rem;
 }
 
-/* Карти */
 .card {
     border: none;
     box-shadow: var(--shadow);
     transition: var(--transition);
     background: var(--card-bg);
     color: var(--text-color);
-    overflow: hidden;  /* Фікс "пливучих" елементів */
+    overflow: hidden;
 }
 
 .card:hover {
@@ -276,7 +272,6 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     to { opacity: 1; }
 }
 
-/* Карусель */
 .carousel-item img {
     height: 250px;
     object-fit: cover;
@@ -297,7 +292,8 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
     filter: invert(1);
 }
 
@@ -305,19 +301,22 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     background-color: #00bfff;
 }
 
-/* 3D-моделі (фікс з-index) */
-model-viewer {
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    --progress-bar-height: 2px;
-    z-index: 1;  /* Над фоном */
+.me-2 {
+    margin-left: 0.5rem;
 }
 
-model-viewer:hover {
+.team-img {
+    max-width: 600px;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.team-img:hover {
+    transform: scale(1.02);
     box-shadow: 0 0 20px var(--starlink-glow);
 }
 
-/* Мобільний */
 @media (max-width: 768px) {
     .animated-title { 
         font-size: 1.4rem;
@@ -331,5 +330,5 @@ model-viewer:hover {
     .header { min-height: 50vh; }
     .navbar-logo { height: 30px; }
     .navbar-text { display: none; }
-    model-viewer { height: 200px; }
+    .team-img { max-width: 100%; }
 }
