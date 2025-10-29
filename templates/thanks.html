@@ -4,22 +4,34 @@
 
 {% block content %}
 <section class="row section">
-    <h2 class="col-12 mb-4 text-center">Подяки від клієнтів</h2>
-    <div class="accordion" id="reviewsAccordion">
-        {% for review in reviews %}
-        <div class="accordion-item bg-transparent border-light">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#review{{ loop.index }}">
-                    {{ review.author }}
-                </button>
-            </h2>
-            <div id="review{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#reviewsAccordion">
-                <div class="accordion-body bg-secondary text-white">
-                    {{ review.text }}
+    <div class="col-md-8">
+        <h2 class="col-12 mb-4 text-center">Подяки від клієнтів</h2>
+        <div class="accordion" id="reviewsAccordion">
+            {% for review in reviews %}
+            <div class="accordion-item bg-transparent border-light">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#review{{ loop.index }}">
+                        {{ review.author }}
+                    </button>
+                </h2>
+                <div id="review{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#reviewsAccordion">
+                    <div class="accordion-body bg-secondary text-white">
+                        {{ review.text }}
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+    </div>
+    <div class="col-md-4">
+        <!-- 3D-модель біля відгуків -->
+        <model-viewer src="{{ url_for('static', filename='3D_gltf_models/auto_mod.gltf') }}" 
+                      alt="3D-модель для авто" 
+                      auto-rotate 
+                      camera-controls 
+                      loading="lazy" 
+                      style="width: 100%; height: 400px;">
+        </model-viewer>
     </div>
 </section>
 {% endblock %}
