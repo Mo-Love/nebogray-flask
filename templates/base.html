@@ -17,23 +17,24 @@
 
     <button class="btn theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='Nebogray-Logo-BLK-150x150.jpg') }}" alt="Небограй Лого" class="navbar-logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="/"><i class="fas fa-home"></i> Головна</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="/about"><i class="fas fa-info-circle"></i> Про нас</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'contacts' %}active{% endif %}" href="/contacts"><i class="fas fa-phone"></i> Контакти</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'thanks' %}active{% endif %}" href="/thanks"><i class="fas fa-star"></i> Подяки</a></li>
-                </ul>
-            </div>
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='Nebogray-Logo-BLK-150x150.jpg') }}" alt="Небограй Лого" class="navbar-logo me-2">
+            <span class="navbar-text">Небограй</span>  <!-- Повернуто текст -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="/"><i class="fas fa-home"></i> Головна</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="/about"><i class="fas fa-info-circle"></i> Про нас</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.endpoint == 'contacts' %}active{% endif %}" href="/contacts"><i class="fas fa-phone"></i> Контакти</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.endpoint == 'thanks' %}active{% endif %}" href="/thanks"><i class="fas fa-star"></i> Подяки</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
     <header class="header starry-bg text-center" id="home">
         <div class="stars" id="stars"></div>
         <div class="container">
