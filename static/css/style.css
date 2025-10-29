@@ -1,4 +1,17 @@
-/* Navbar з написом "Небограй" */
+/* Прелоадер — 2с, пульсація */
+.preloader-img {
+    max-width: 200px;
+    max-height: 200px;
+    animation: pulse 1s ease-in-out infinite;  /* Пульсація (scale 1 -> 1.2) */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Navbar текст "Небограй" */
 .navbar-text {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -6,15 +19,21 @@
     color: var(--accent-color) !important;
     text-shadow: 0 0 10px var(--starlink-glow);
     vertical-align: middle;
-    display: inline !important;  /* Фікс: завжди видно */
-    margin-left: 0.5rem;  /* Відступ від лого */
+    display: inline !important;
+    margin-left: 0.5rem;
 }
 
+.navbar-brand:hover .navbar-text {
+    transform: scale(1.05);
+    text-shadow: 0 0 15px var(--starlink-glow);
+}
+
+/* Кнопка зміни теми */
 .theme-toggle {
-    position: fixed;
+    position: fixed !important;
     top: 20px;
     right: 20px;
-    z-index: 2000;  /* Фікс: вище меню (navbar z-index 1000) */
+    z-index: 2000;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -23,6 +42,7 @@
     border: 1px solid var(--text-color);
     box-shadow: 0 0 10px var(--starlink-glow);
     transition: var(--transition);
+    cursor: pointer;
 }
 
 .theme-toggle:hover {
@@ -30,38 +50,42 @@
     box-shadow: 0 0 15px var(--starlink-glow);
 }
 
-/* Супутник — CSS-анімація (orbit навколо заголовка) */
+/* Супутник — орбіта */
 .satellite-orbit {
     position: relative;
     display: inline-block;
     margin-top: -0.5rem;
-    width: 100%;  /* Для центрування */
-    height: 100px;  /* Простір для орбіти */
 }
 
 .satellite {
     font-size: 2rem;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    animation: orbit 4s linear infinite;  /* Орбіта навколо заголовка */
+    animation: orbit 4s linear infinite;
     transition: animation-duration 0.3s;
 }
 
-@keyframes orbit {
-    0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
-}
-
 .satellite:hover {
-    animation-duration: 2s;  /* Прискорення на hover */
+    animation-duration: 2s;
     filter: drop-shadow(0 0 10px var(--starlink-glow));
 }
 
-/* Мобільний — менша орбіта */
+/* Зірки — фікс анімації */
+.star {
+    position: absolute;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate, fall 8s linear infinite !important;  /* Фікс: примусово застосовуємо */
+}
+
+/* ... (решта CSS без змін) ... */
+
+/* Мобільний — фікс меню (bootstrap default) */
 @media (max-width: 768px) {
-    .satellite-orbit { height: 80px; }
-    .satellite { animation: orbit 3s linear infinite; }
-    .satellite { font-size: 1.5rem; }
-    .navbar-text { font-size: 1.2rem; margin-left: 0.25rem; }  /* Компактний напис */
+    .navbar-collapse {
+        background: var(--card-bg);
+        padding: 1rem;
+        border-top: 1px solid var(--text-color);
+    }
+    .nav-link {
+        text-align: center;
+    }
 }
