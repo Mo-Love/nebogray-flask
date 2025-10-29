@@ -64,22 +64,33 @@ body {
     animation: navbarGlow 2s ease-in-out infinite alternate;
 }
 
+/* Navbar лого + текст */
 .navbar-logo {
-    height: 40px; /* Компактний розмір */
+    height: 40px;
     width: auto;
     transition: var(--transition);
 }
 
-.navbar-logo:hover {
-    transform: scale(1.05);
+.navbar-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--accent-color) !important;
+    text-shadow: 0 0 10px var(--starlink-glow);
+    vertical-align: middle; /* Вирівнювання з img */
+}
+
+.navbar-brand:hover .navbar-logo,
+.navbar-brand:hover .navbar-text {
+    transform: scale(1.05); /* Hover на весь бренд */
     filter: drop-shadow(0 0 10px var(--starlink-glow));
 }
 
-@keyframes navbarGlow {
-    from { box-shadow: var(--shadow), 0 0 20px var(--starlink-glow); }
-    to { box-shadow: var(--shadow), 0 0 30px var(--starlink-glow); }
+/* Мобільний — текст ховається, тільки лого */
+@media (max-width: 768px) {
+    .navbar-text { display: none; }
+    .navbar-logo { height: 30px; }
 }
-
 .nav-link {
     font-weight: 600;
     color: var(--text-color) !important;
