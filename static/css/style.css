@@ -282,3 +282,71 @@ body {
         margin-left: 8px;
     }
 }
+/* Космічні анімації: Зірковий фон — обмежено по висоті */
+.starry-bg {
+    position: relative;
+    background: var(--bg-color);
+    overflow: hidden; /* Ховаємо переливання */
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Обмежено viewport, не розтягується */
+    pointer-events: none;
+    overflow: hidden; /* Запобігає падінню за межі */
+}
+
+.star {
+    position: absolute;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate, fall 8s linear infinite; /* Швидше fall для компактності */
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* Заголовок з анімацією — вища позиція */
+.header {
+    padding: 2.5rem 0; /* Зменшено з 4rem для підняття */
+    text-align: center;
+    background: var(--bg-color);
+    position: relative;
+    min-height: 50vh; /* Фіксована мінімальна висота для десктопу */
+}
+
+.satellite-orbit {
+    position: relative;
+    display: inline-block;
+    margin-top: -1rem; /* Піднімає заголовок */
+}
+
+.animated-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 2.2rem;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-word;
+    border-right: 3px solid var(--accent-color);
+    animation: typing 3.5s steps(60, end), blink-caret 0.75s step-end infinite; /* Більше steps для довшого тексту */
+    margin: 0 auto;
+}
+
+/* Мобільний — без змін */
+@media (max-width: 768px) {
+    .stars { height: 80vh; } /* Менше на мобільному */
+    .header { padding: 2rem 0; min-height: 40vh; }
+    .animated-title { font-size: 1.6rem; animation: typing 3s steps(50, end); }
+}
