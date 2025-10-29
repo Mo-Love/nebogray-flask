@@ -3,16 +3,16 @@ import os
 
 app = Flask(__name__)
 
-# Дані для 3D-моделей (з репозиторію)
+# Дані для 3D-моделей (шляхи з репозиторію)
 models = {
-    'terminal': {'name': 'Starlink V2 Термінал', 'file': 'starlink_terminal.gltf', 'desc': 'Базова модель для ремонту.'},
-    'auto': {'name': 'Для авто', 'file': 'auto_mod.gltf', 'desc': 'Модифікація з магнітами.'},
-    'repair': {'name': 'Ремонт', 'file': 'repair_model.gltf', 'desc': 'Модель з заміною корпусу.'}
+    'terminal': {'name': 'Starlink V2 Термінал', 'file': '3D_gltf_models/starlink_terminal.gltf', 'desc': 'Базова модель для ремонту.'},
+    'auto': {'name': 'Для авто', 'file': '3D_gltf_models/auto_mod.gltf', 'desc': 'Модифікація з магнітами.'},
+    'repair': {'name': 'Ремонт', 'file': '3D_gltf_models/repair_model.gltf', 'desc': 'Модель з заміною корпусу.'}
 }
 
 @app.route('/')
 def index():
-    stats = {'reobladnano': 2500, 'vidremontovano': 17000}
+    stats = {'reobladnano': 2500, 'vidremontovano': 17000}  # Fallback: якщо JS fail, покажи статично
     services = [
         {
             'title': 'Переобладнання StarLink V2 для Вашого авто',
