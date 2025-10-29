@@ -60,103 +60,68 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // DOM ready перевірка
-    document.addEventListener('DOMContentLoaded', function() {
-        // Прелоадер — 3с
-        setTimeout(() => {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 300);
-            }
-        }, 3000);
-
-        function toggleTheme() {
-            const body = document.body;
-            body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
+    // Прелоадер — 3с
+    setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 300);
         }
+    }, 3000);
 
-        // Анімація лічильників
-        function animateCounters() {
-            const counters = document.querySelectorAll('.count');
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                const increment = target / 50;
-                let current = 0;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                        counter.innerHTML = '> ' + current.toLocaleString();
-                    } else {
-                        counter.textContent = Math.floor(current).toLocaleString();
-                    }
-                }, 40);
-            });
-        }
-        if (document.getElementById('stats')) animateCounters();
+    function toggleTheme() {
+        const body = document.body;
+        body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
+    }
 
-        // Зірки
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            if (!starsContainer) return;
-            const num = window.innerWidth > 768 ? 30 : 20;
-            for (let i = 0; i < num; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
-                star.style.animationDelay = Math.random() * 10 + 's';
-                star.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                starsContainer.appendChild(star);
-            }
-        }
-        createStars();
-
-        // Parallax для супутника (фікс: debounce, перевірка, console)
-        let ticking = false;
-        function updateSatellite() {
-            const satellite = document.querySelector('.satellite');
-            if (satellite) {
-                const scrolled = window.pageYOffset;
-                satellite.style.transform = `translateY(${scrolled * 0.5}px)`;
-                console.log('Satellite moving:', scrolled);  // Дебаг: F12 > Console
-            } else {
-                console.log('Satellite element not found');  // Якщо не знайдено
-            }
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(updateSatellite);
-                ticking = true;
-            }
+    // Анімація лічильників
+    function animateCounters() {
+        const counters = document.querySelectorAll('.count');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const increment = target / 50;
+            let current = 0;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                    counter.innerHTML = '> ' + current.toLocaleString();
+                } else {
+                    counter.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 40);
         });
+    }
+    if (document.getElementById('stats')) animateCounters();
 
-        // Fallback: hover-рух, якщо скрол не працює
-        const satellite = document.querySelector('.satellite');
-        if (satellite) {
-            satellite.addEventListener('mouseenter', () => {
-                satellite.style.animation = 'rotate 2s linear infinite';
-            });
-            satellite.addEventListener('mouseleave', () => {
-                satellite.style.animation = '';
-            });
-            console.log('Satellite fallback ready');  // Дебаг
+    // Зірки
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        if (!starsContainer) return;
+        const num = window.innerWidth > 768 ? 30 : 20;
+        for (let i = 0; i < num; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+            star.style.animationDelay = Math.random() * 10 + 's';
+            star.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            starsContainer.appendChild(star);
         }
+    }
+    createStars();
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
         });
     });
 </script>
