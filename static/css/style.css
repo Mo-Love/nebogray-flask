@@ -1,7 +1,7 @@
 :root {
     --bg-color: #000;
     --text-color: #fff;
-    --card-bg: rgba(17, 17, 17, 0.6);
+    --card-bg: rgba(17, 17, 17, 0.4); /* Starlink-подібна прозорість */
     --accent-color: #fff;
     --starlink-glow: #00bfff;
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -12,31 +12,188 @@
 [data-theme="light"] {
     --bg-color: #fff;
     --text-color: #000;
-    --card-bg: rgba(248, 249, 250, 0.8);
+    --card-bg: rgba(248, 249, 250, 0.7);
     --accent-color: #000;
     --starlink-glow: #00bfff;
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 body {
-    font-family: 'Victor Mono', 'Roboto', sans-serif;
+    font-family: 'Ysabeau', 'Roboto', sans-serif; /* Ysabeau основний */
     background: var(--gradient-bg);
     color: var(--text-color);
     transition: var(--transition);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
 }
 
 /* Меню */
 .navbar {
-    background: rgba(0, 0, 0, 0.8) !important;
+    background: rgba(0, 0, 0, 0.7) !important;
     box-shadow: var(--shadow), 0 0 20px var(--starlink-glow);
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     animation: navbarGlow 2s ease-in-out infinite alternate;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(15px);
+}
+
+@keyframes navbarGlow {
+    from { box-shadow: var(--shadow), 0 0 20px var(--starlink-glow); }
+    to { box-shadow: var(--shadow), 0 0 30px var(--starlink-glow); }
+}
+
+.navbar-brand {
+    font-family: 'Ysabeau', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--accent-color) !important;
+    text-shadow: 0 0 10px var(--starlink-glow);
+}
+
+.nav-link {
+    font-family: 'Ysabeau', sans-serif;
+    font-weight: 500;
+    color: var(--text-color) !important;
+    transition: var(--transition);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin: 0 0.25rem;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--starlink-glow) !important;
+    background: rgba(0, 191, 255, 0.15);
+    text-shadow: 0 0 15px var(--starlink-glow);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--starlink-glow);
+}
+
+/* Хедер */
+.header {
+    padding: 4rem 0;
+    text Revealing text: text-align: center;
+    background: var(--gradient-bg);
+    position: relative;
+    overflow: visible;
+}
+
+.animated-title {
+    font-family: 'Ysabeau', sans-serif;
+    font-weight: 700;
+    font-size: 2.2rem;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--accent-color);
+    animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+    margin: 0 auto;
+}
+
+/* Супутник */
+.satellite-orbit {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+}
+
+.satellite {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    font-size: 2rem;
+    color: var(--starlink-glow);
+    animation: orbit 4s linear infinite;
+    z-index: 10;
+}
+
+@keyframes orbit {
+    0% { transform: translateX(-50%) rotate(0deg) translateX(100px) rotate(0deg) scale(1); }
+    100% { transform: translateX(-50%) rotate(360deg) translateX(100px) rotate(-360deg) scale(1.1); }
+}
+
+.stars {
+    z-index: 1;
+}
+
+/* Карточки */
+.card {
+    border: none;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    color: var(--text-color);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--starlink-glow);
+    background: rgba(17, 17, 17, 0.6);
+}
+
+.card-header h5 {
+    font-family: 'Ysabeau', sans-serif;
+    font-weight: 600;
+}
+
+.stats-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+}
+
+.count {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--starlink-glow);
+}
+
+/* Карусель */
+.carousel-item img {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.carousel-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--starlink-glow);
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* Мобільна версія */
+@media (max-width: 768px) {
+    .animated-title {
+        font-size: 1.6rem;
+        white-space: normal;
+        animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+        overflow: visible;
+    }
+    .satellite {
+        font-size: 1.5rem;
+        top: -15px;
+        animation: orbit 4s linear infinite;
+        transform-origin: center;
+    }
+    .satellite-orbit {
+        height: 80px;
+    }
+    .carousel-item img { height: 150px; }
+    .carousel-caption { display: none; }
 }
