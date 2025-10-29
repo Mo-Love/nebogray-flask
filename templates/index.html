@@ -1,12 +1,5 @@
 {% extends 'base.html' %}
 
-{% block header %}
-<div class="satellite-orbit">
-    <i class="fas fa-satellite satellite"></i>
-    <h1 class="animated-title">Професійний ремонт та<br>переобладнання терміналів<br>STARLINK під ваше авто</h1>
-</div>
-{% endblock %}
-
 {% block content %}
 <!-- Статистика з анімацією та більшими відступами -->
 <section id="stats" class="row mb-5 g-4 text-center section">
@@ -91,7 +84,7 @@
                     </button>
                 </div>
                 {% endif %}
-                <!-- Карусель для другої послуги (ремонт) — 3 фото -->
+                <!-- Карусель для другої послуги (ремонт) -->
                 {% if loop.index == 2 %}
                 <div id="carouselServices2" class="carousel slide mt-3" data-bs-ride="carousel">
                     <div class="carousel-indicators">
