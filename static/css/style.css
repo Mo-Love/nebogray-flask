@@ -34,7 +34,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--bg-color);
+    background: #000; /* Чорний фон для космосу */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,12 +43,12 @@ body {
 }
 
 .preloader-star {
-    width: 50px;
-    height: 50px;
-    border: 4px solid var(--starlink-glow);
+    width: 60px;
+    height: 60px;
+    border: 5px solid var(--starlink-glow);
     border-top-color: transparent;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 1.2s linear infinite;
 }
 
 @keyframes spin {
@@ -78,11 +78,15 @@ body {
     font-size: 1.8rem;
     color: var(--accent-color) !important;
     text-shadow: 0 0 10px var(--starlink-glow);
+    display: flex;
+    align-items: center;
 }
 
-.navbar-brand i {
+.navbar-brand .logo-icon, .navbar-brand .logo-fallback {
     margin-right: 0.5rem;
     font-size: 1.5rem;
+    color: var(--starlink-glow);
+    display: inline-block;
 }
 
 .nav-link {
@@ -200,10 +204,11 @@ body {
 
 .satellite {
     position: absolute;
-    top: -2rem;
-    left: -2rem;
+    top: -1.5rem;
+    left: -1.5rem;
     font-size: 2rem;
-    animation: orbit 6s linear infinite; /* Відновлено орбіту */
+    color: var(--starlink-glow);
+    animation: orbit 6s linear infinite;
 }
 
 /* Анімація орбіти */
@@ -318,6 +323,6 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     .carousel-item img { height: 150px; }
     .carousel-caption { display: none; }
     .header { min-height: 50vh; }
-    .satellite { font-size: 1.5rem; top: -1.5rem; left: -1.5rem; }
+    .satellite { font-size: 1.5rem; top: -1rem; left: -1rem; }
     .preloader-star { width: 40px; height: 40px; }
 }
