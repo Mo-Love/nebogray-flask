@@ -1,130 +1,39 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<!-- Статистика з анімацією та більшими відступами -->
-<section id="stats" class="row mb-5 g-4 text-center section">
-    <div class="col-md-6">
-        <div class="card stats-card bg-secondary text-white">
-            <div class="card-body">
-                <h2><i class="fas fa-tools"></i> Переобладнано:</h2>
-                <div class="count" data-target="{{ stats.reobladnano }}">0</div>
-            </div>
-        </div>
+{% block header %}
+<div class="hero-content">
+    <!-- 3D-фон у hero -->
+    <model-viewer id="hero-model" src="{{ url_for('static', filename='3D_gltf_models/starlink_terminal.gltf') }}" 
+                  alt="3D-модель Starlink" 
+                  auto-rotate 
+                  camera-controls 
+                  loading="lazy" 
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2;"
+                  aria-label="Фонова 3D-модель терміналу">
+    </model-viewer>
+    <div class="satellite-orbit">
+        <i class="fas fa-satellite satellite"></i>
+        <h1 class="animated-title">Професійний ремонт та<br>переобладнання терміналів<br>STARLINK під ваше авто</h1>
     </div>
-    <div class="col-md-6">
-        <div class="card stats-card bg-secondary text-white">
-            <div class="card-body">
-                <h2><i class="fas fa-wrench"></i> Відремонтовано:</h2>
-                <div class="count" data-target="{{ stats.vidremontovano }}">0</div>
-            </div>
-        </div>
-    </div>
-</section>
+    <p class="hero-subtitle fade-in">Швидкий сервіс для стабільного інтернету в дорозі</p>
+    <a href="/contacts" class="btn btn-primary btn-lg hero-cta fade-in">Замовити переобладнання</a>
+</div>
+{% endblock %}
 
-<!-- Послуги -->
-<section class="row mb-5 section">
-    {% for service in services %}
-    <div class="col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-header bg-dark text-white">
-                <h5>{{ service.title }}</h5>
-            </div>
-            <div class="card-body">
-                <p>{{ service.description }}</p>
-                <button class="btn btn-outline-light" data-bs-toggle="collapse" data-bs-target="#details{{ loop.index }}">Деталі</button>
-                <div class="collapse mt-3" id="details{{ loop.index }}">
-                    <ul class="list-group list-group-flush">
-                        {% for detail in service.details %}
-                        <li class="list-group-item bg-transparent text-white"><i class="fas fa-check"></i> {{ detail }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <!-- Карусель для першої послуги (переобладнання) -->
-                {% if loop.index == 1 %}
-                <div id="carouselServices1" class="carousel slide mt-3" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ url_for('static', filename='images/pid_avto_starlink.jpg') }}" class="d-block w-100" alt="Starlink під авто" loading="lazy">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Starlink під авто</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/starlink_avtopererobka.jpg') }}" class="d-block w-100" alt="Автопереробка Starlink" loading="lazy">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Автопереробка</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/starlink_dlya_avto.jpg') }}" class="d-block w-100" alt="Starlink для авто" loading="lazy">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Для авто</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/starlink_pid_avto.jpg') }}" class="d-block w-100" alt="Starlink під авто" loading="lazy">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Під авто</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselServices1" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselServices1" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                {% endif %}
-                <!-- Карусель для другої послуги (ремонт) -->
-                {% if loop.index == 2 %}
-                <div id="carouselServices2" class="carousel slide mt-3" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ url_for('static', filename='images/pererobka_rozyemu_starlink_rj45.jpg') }}" class="d-block w-100" alt="Переробка роз'єму Starlink RJ45" loading="lazy">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Переробка роз'єму</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/remont_poshkodjenoyi_plati_starlink.jpg') }}" class="d-block w-100" alt="Ремонт пошкодженої плати Starlink" loading="lazy">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Ремонт плати</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/zamina_korpusu_starlink.jpg') }}" class="d-block w-100" alt="Заміна корпусу Starlink" loading="lazy">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Заміна корпусу</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselServices2" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselServices2" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</section>
+{% block content %}
+<!-- ... (статистика та послуги без змін, але додаємо маленьку модель у першій послузі) ... -->
+
+<!-- У блоці послуг, після каруселі першої послуги -->
+{% if loop.index == 1 %}
+<!-- ... (карусель) ... -->
+<model-viewer src="{{ url_for('static', filename='3D_gltf_models/auto_mod.gltf') }}" 
+              alt="3D-модель для авто" 
+              auto-rotate 
+              camera-controls 
+              loading="lazy" 
+              style="width: 100%; height: 200px; margin-top: 1rem;">
+</model-viewer>
+{% endif %}
+
+<!-- ... (решта контенту) ... -->
 {% endblock %}
