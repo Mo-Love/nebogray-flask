@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body data-theme="dark">
+    <!-- Прелоадер з відео — грає перед завантаженням -->
+    <div id="preloader" class="preloader">
+        <video id="preload-video" autoplay muted loop playsinline>
+            <source src="{{ url_for('static', filename='Grok-Video-878D407B-6744-4F80-BF3089D3B648.mov') }}" type="video/mp4">
+            Ваш браузер не підтримує відео.
+        </video>
+    </div>
+
     <button class="btn theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -102,6 +110,16 @@
                     interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } },
                     retina_detect: true
                 });
+            }
+        });
+        // Прелоадер — зникає після завантаження
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
             }
         });
     </script>
