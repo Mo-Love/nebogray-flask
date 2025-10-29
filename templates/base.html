@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body data-theme="dark">
-    <!-- Прелоадер -->
+    <!-- Прелоадер — 2с, пульсує -->
     <div id="preloader" class="preloader">
         <img src="{{ url_for('static', filename='IMG_0093.gif') }}" alt="Завантаження..." class="preloader-img">
     </div>
 
-    <!-- Кнопка зміни теми (вище z-index) -->
+    <!-- Кнопка зміни теми -->
     <button class="btn theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
 
     <!-- Navbar з написом "Небограй" -->
@@ -63,9 +63,9 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // DOM ready
+        // DOM ready — фікс для запуску після завантаження
         document.addEventListener('DOMContentLoaded', function() {
-            // Прелоадер — 3с
+            // Прелоадер — 2с, пульсація в CSS
             setTimeout(() => {
                 const preloader = document.getElementById('preloader');
                 if (preloader) {
@@ -74,12 +74,17 @@
                         preloader.style.display = 'none';
                     }, 300);
                 }
-            }, 3000);
+            }, 2000);
 
             function toggleTheme() {
                 const body = document.body;
                 body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', body.dataset.theme);  // Зберігаємо тему в localStorage
             }
+
+            // Відновлення теми з localStorage (фікс, якщо не працює)
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) document.body.dataset.theme = savedTheme;
 
             // Анімація лічильників
             function animateCounters() {
@@ -102,10 +107,13 @@
             }
             if (document.getElementById('stats')) animateCounters();
 
-            // Зірки
+            // Зірки (фікс: перевірка контейнера)
             function createStars() {
                 const starsContainer = document.getElementById('stars');
-                if (!starsContainer) return;
+                if (!starsContainer) {
+                    console.log('Stars container not found');
+                    return;
+                }
                 const num = window.innerWidth > 768 ? 30 : 20;
                 for (let i = 0; i < num; i++) {
                     const star = document.createElement('div');
@@ -117,6 +125,7 @@
                     star.style.animationDuration = (Math.random() * 10 + 5) + 's';
                     starsContainer.appendChild(star);
                 }
+                console.log('Stars created:', num);
             }
             createStars();
 
@@ -130,23 +139,11 @@
 
             // Дебаг: перевірка елементів
             const navbarText = document.querySelector('.navbar-text');
-            if (navbarText) {
-                console.log('Navbar text loaded: Небограй');
-            } else {
-                console.log('Navbar text not found');
-            }
+            if (navbarText) console.log('Navbar text loaded: Небограй');
             const themeToggle = document.querySelector('.theme-toggle');
-            if (themeToggle) {
-                console.log('Theme toggle loaded');
-            } else {
-                console.log('Theme toggle not found');
-            }
+            if (themeToggle) console.log('Theme toggle loaded');
             const satellite = document.querySelector('.satellite');
-            if (satellite) {
-                console.log('Satellite loaded and animated');
-            } else {
-                console.log('Satellite not found');
-            }
+            if (satellite) console.log('Satellite loaded and animated');
         });
     </script>
 </body>
