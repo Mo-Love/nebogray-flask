@@ -29,7 +29,7 @@ body {
     backdrop-filter: blur(15px);
 }
 
-/* Прелоадер з відео */
+/* Прелоадер */
 .preloader {
     position: fixed;
     top: 0;
@@ -48,7 +48,7 @@ body {
     left: 50%;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Повноекранне відео */
+    object-fit: cover;
     transform: translate(-50%, -50%);
 }
 
@@ -80,7 +80,7 @@ body {
 }
 
 .nebogray-logo {
-    height: 32px; /* Збільшено з 24px */
+    height: 32px;
     margin-right: 8px;
     transition: var(--transition);
 }
@@ -164,7 +164,7 @@ body {
     transition: var(--transition);
     color: var(--text-color);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255,255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .card:hover {
@@ -233,7 +233,7 @@ body {
     .carousel-item img { height: 150px; }
     .carousel-caption { display: none; }
     .nebogray-logo {
-        height: 28px; /* Збільшено з 20px */
+        height: 28px;
     }
     .navbar-brand {
         font-size: 1.5rem;
