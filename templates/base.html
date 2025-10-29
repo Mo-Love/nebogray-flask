@@ -5,55 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Небограй – Професійний ремонт STARLINK{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@300;400&family=Victor+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<header class="header starry-bg text-center">
-    <div class="stars" id="stars"></div> <!-- Зірки під орбітою -->
-    <div class="container">
-        {% block header %}
-        <div class="satellite-orbit">
-            <i class="fas fa-satellite satellite"></i> <!-- Тепер чисто CSS-анімація -->
-            <h1 class="animated-title">Ремонтуємо та переобладнуємо термінали STARLINK</h1>
-        </div>
-        {% endblock %}
-    </div>
-</header>
-
-<!-- У <script> — спрощений init, без конфліктів -->
-<script>
-    // ... (інші функції)
-    function createStars() {
-        const starsContainer = document.getElementById('stars');
-        if (!starsContainer) return;
-        // Генеруємо зірки тільки якщо particles не завантажилися
-        if (typeof particlesJS === 'undefined') {
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
-                star.style.animationDelay = Math.random() * 10 + 's';
-                star.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                starsContainer.appendChild(star);
-            }
-        }
-    }
-    createStars(); // Запускаємо одразу
-
-    // Particles fallback — тільки якщо не конфліктує
-    window.addEventListener('load', () => {
-        if (typeof particlesJS !== 'undefined' && window.location.pathname === '/') {
-            particlesJS('stars', {
-                particles: { number: { value: 80 }, color: { value: '#fff' }, shape: { type: 'circle' }, opacity: { value: 0.5, random: true }, size: { value: 2, random: true }, line_linked: { enable: false }, move: { enable: true, speed: 1, direction: 'none', random: true, out_mode: 'out' } },
-                interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } },
-                retina_detect: true
-            });
-        }
-    });
-</script>
 <body data-theme="dark">
     <button class="btn theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -94,7 +49,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // ... (JS без змін, з animateCounters для " > 2 500")
         function toggleTheme() {
             const body = document.body;
             body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -119,29 +73,31 @@
         }
         if (document.getElementById('stats')) animateCounters();
         function createStars() {
-            const starsContainer = document.getElementById('stars') || document.querySelector('.starry-bg');
+            const starsContainer = document.getElementById('stars');
             if (!starsContainer) return;
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
-                star.style.animationDelay = Math.random() * 10 + 's';
-                star.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                starsContainer.appendChild(star);
+            if (typeof particlesJS === 'undefined') {
+                for (let i = 0; i < 50; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+                    star.style.animationDelay = Math.random() * 10 + 's';
+                    star.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                    starsContainer APPEND(star);
+                }
             }
         }
         createStars();
-        if (typeof particlesJS !== 'undefined' && window.location.pathname === '/') {
-            particlesJS('stars', {
-                particles: { number: { value: 80 }, color: { value: '#fff' }, shape: { type: 'circle' }, opacity: { value: 0.5, random: true }, size: { value: 2, random: true }, line_linked: { enable: false }, move: { enable: true, speed: 1, direction: 'none', random: true, out_mode: 'out' } },
-                interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } },
-                retina_detect: true
-            });
-        } else {
-            console.log('Particles.js not loaded, using CSS stars fallback');
-        }
+        window.addEventListener('load', () => {
+            if (typeof particlesJS !== 'undefined' && window.location.pathname === '/') {
+                particlesJS('stars', {
+                    particles: { number: { value: 80 }, color: { value: '#fff' }, shape: { type: 'circle' }, opacity: { value: 0.5, random: true }, size: { value: 2, random: true }, line_linked: { enable: false }, move: { enable: true, speed: 1, direction: 'none', random: true, out_mode: 'out' } },
+                    interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } },
+                    retina_detect: true
+                });
+            }
+        });
     </script>
 </body>
 </html>
