@@ -91,11 +91,19 @@
                 }, 1000); // Синхронізовано з transition: opacity 1s
             }
         }
+        // Гарантуємо мінімум 3с для прелоадера
+        let isPreloaderShown = false;
         window.addEventListener('DOMContentLoaded', () => {
             if (document.getElementById('stats')) animateCounters();
-            setTimeout(hidePreloader, 3000); // 3с для прелоадера
+            setTimeout(() => {
+                isPreloaderShown = true;
+                hidePreloader();
+            }, 3000); // Мінімум 3с
         });
-        window.addEventListener('load', hidePreloader);
+        window.addEventListener('load', () => {
+            if (isPreloaderShown) return; // Уникаємо раннього приховування
+            hidePreloader();
+        });
         function createStars() {
             const starsContainer = document.getElementById('stars');
             if (!starsContainer) return;
