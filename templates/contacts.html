@@ -17,8 +17,15 @@
         </div>
     </div>
     <div class="col-md-6">
-        <!-- Додай карту: <iframe src="https://maps.google.com/..."></iframe> -->
-        <div class="card">
+        <!-- 3D-модель як sidebar -->
+        <model-viewer src="{{ url_for('static', filename='3D_gltf_models/starlink_terminal.gltf') }}" 
+                      alt="3D-модель терміналу" 
+                      auto-rotate 
+                      camera-controls 
+                      loading="lazy" 
+                      style="width: 100%; height: 400px;">
+        </model-viewer>
+        <div class="card mt-3">
             <div class="card-body">
                 <h2>Зв'яжіться з нами</h2>
                 <form>
