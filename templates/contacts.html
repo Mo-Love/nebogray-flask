@@ -17,8 +17,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <!-- 3D-модель як sidebar -->
-        <model-viewer src="{{ url_for('static', filename='3D_gltf_models/starlink_terminal.gltf') }}" 
+        <model-viewer src="{{ url_for('static', filename=models.terminal.file) }}" 
                       alt="3D-модель терміналу" 
                       auto-rotate 
                       camera-controls 
