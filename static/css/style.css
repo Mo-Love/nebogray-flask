@@ -340,10 +340,54 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     .navbar-text { display: none; }
     .team-img { max-width: 100%; }
 }
-/* Fallback для супутника — hover-рух */
+/* Супутник — CSS-анімація (замість JS) */
+.satellite-orbit {
+    position: relative;
+    display: inline-block;
+    margin-top: -0.5rem;
+    overflow: visible;  /* Для видимості анімації */
+}
+
+.satellite {
+    font-size: 2rem;
+    animation: float 6s ease-in-out infinite, rotate 10s linear infinite;  /* Постійний рух + обертання */
+    transition: animation 0.3s ease;  /* Плавний hover */
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(180deg); }  /* Легкий "політ" вгору-вниз */
+}
+
 @keyframes rotate {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
+.satellite:hover {
+    animation-duration: 2s, 4s;  /* Прискорення на hover */
+    filter: drop-shadow(0 0 10px var(--starlink-glow));  /* Glow */
+}
+
+/* Hero з parallax для фону (CSS-only) */
+.header {
+    padding: 2rem 0;
+    text-align: center;
+    background: linear-gradient(to bottom, var(--bg-color), rgba(0, 191, 255, 0.1));
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-attachment: fixed;  /* CSS-parallax для фону */
+}
+
 /* ... (решта CSS без змін) ... */
+
+/* Мобільний — вимикаємо анімацію для perf */
+@media (max-width: 768px) {
+    .satellite {
+        animation: rotate 8s linear infinite;  /* Тільки обертання, без float */
+    }
+    .header { background-attachment: scroll; }  /* Без parallax на мобільному */
+}
