@@ -8,33 +8,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>  <!-- 3D-viewer -->
 </head>
 <body data-theme="dark">
-    <!-- Прелоадер — full-screen GIF на 3с -->
+    <!-- Прелоадер -->
     <div id="preloader" class="preloader">
         <img src="{{ url_for('static', filename='IMG_0093.gif') }}" alt="Завантаження..." class="preloader-img">
     </div>
 
     <button class="btn theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
     <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="{{ url_for('static', filename='Nebogray-Logo-BLK-150x150.jpg') }}" alt="Небограй Лого" class="navbar-logo me-2">
-            <span class="navbar-text">Небограй</span>  <!-- Повернуто текст -->
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="/"><i class="fas fa-home"></i> Головна</a></li>
-                <li class="nav-item"><a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="/about"><i class="fas fa-info-circle"></i> Про нас</a></li>
-                <li class="nav-item"><a class="nav-link {% if request.endpoint == 'contacts' %}active{% endif %}" href="/contacts"><i class="fas fa-phone"></i> Контакти</a></li>
-                <li class="nav-item"><a class="nav-link {% if request.endpoint == 'thanks' %}active{% endif %}" href="/thanks"><i class="fas fa-star"></i> Подяки</a></li>
-            </ul>
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="{{ url_for('static', filename='Nebogray-Logo-BLK-150x150.jpg') }}" alt="Небограй Лого" class="navbar-logo me-2">
+                <span class="navbar-text">Небограй</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="/"><i class="fas fa-home"></i> Головна</a></li>
+                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="/about"><i class="fas fa-info-circle"></i> Про нас</a></li>
+                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'contacts' %}active{% endif %}" href="/contacts"><i class="fas fa-phone"></i> Контакти</a></li>
+                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'thanks' %}active{% endif %}" href="/thanks"><i class="fas fa-star"></i> Подяки</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
     <header class="header starry-bg text-center" id="home">
         <div class="stars" id="stars"></div>
         <div class="container">
@@ -59,9 +60,8 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Прелоадер — ховається через 3с
+        // Прелоадер
         setTimeout(() => {
             document.getElementById('preloader').style.opacity = '0';
             setTimeout(() => {
@@ -73,28 +73,33 @@
             const body = document.body;
             body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
         }
-        // Анімація лічильників з ">" 
+
+        // Анімація лічильників (з error-handling)
         function animateCounters() {
-            const counters = document.querySelectorAll('.count');
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                const increment = target / 50;
-                let current = 0;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                        counter.innerHTML = '> ' + current.toLocaleString();
-                    } else {
-                        counter.textContent = Math.floor(current).toLocaleString();
-                    }
-                }, 40);
-            });
+            try {
+                const counters = document.querySelectorAll('.count');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const increment = target / 50;
+                    let current = 0;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                            counter.innerHTML = '> ' + current.toLocaleString();
+                        } else {
+                            counter.textContent = Math.floor(current).toLocaleString();
+                        }
+                    }, 40);
+                });
+            } catch (e) {
+                console.log('Stats animation error:', e);  // Fallback — числа вже статичні
+            }
         }
         if (document.getElementById('stats')) animateCounters();
 
-        // Генерація зірок
+        // Зірки (спрощено, без particles для стабільності)
         function createStars() {
             const starsContainer = document.getElementById('stars');
             if (!starsContainer) return;
@@ -112,24 +117,7 @@
         }
         createStars();
 
-        // Particles
-        if (typeof particlesJS !== 'undefined' && window.location.pathname === '/') {
-            particlesJS('stars', {
-                particles: {
-                    number: { value: 80 },
-                    color: { value: '#fff' },
-                    shape: { type: 'circle' },
-                    opacity: { value: 0.5, random: true },
-                    size: { value: 2, random: true },
-                    line_linked: { enable: false },
-                    move: { enable: true, speed: 1, direction: 'none', random: true, out_mode: 'out' }
-                },
-                interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } },
-                retina_detect: true
-            });
-        }
-
-        // Parallax для супутника
+        // Parallax (спрощено, тільки для супутника)
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const satellite = document.querySelector('.satellite');
@@ -143,14 +131,6 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
-    window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const bgModel = document.getElementById('hero-model');
-    if (bgModel) bgModel.style.transform = `translateY(${scrolled * 0.3}px) rotateY(${scrolled * 0.1}deg)`;
-    const satellite = document.querySelector('.satellite');
-    if (satellite) satellite.style.transform = `translateY(${scrolled * 0.5}px)`;
     </script>
-
-});
 </body>
 </html>
