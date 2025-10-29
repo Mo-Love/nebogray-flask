@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body data-theme="dark">
-    <!-- Прелоадер з відео + fallback -->
+    <!-- Прелоадер з відео -->
     <div id="preloader" class="preloader">
         <video id="preload-video" autoplay muted loop playsinline 
                poster="{{ url_for('static', filename='672860EC-E2ED-4E3D-A21A-3A2ADEA9CA58.png') }}">
@@ -19,7 +19,9 @@
         </video>
     </div>
 
-    <button class="btn theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+    <button class="btn theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon fa-lg"></i>
+    </button>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="/">
@@ -90,14 +92,12 @@
                 preloader.style.opacity = '0';
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                }, 500);
+                }, 1000); // Синхронізовано з transition: opacity 1s
             }
         }
-        // Ховаємо прелоадер після завантаження сторінки
         window.addEventListener('DOMContentLoaded', () => {
             if (document.getElementById('stats')) animateCounters();
-            // Гарантуємо, що прелоадер зникне через 3с, навіть якщо відео не завантажиться
-            setTimeout(hidePreloader, 3000);
+            setTimeout(hidePreloader, 3000); // 3с для прелоадера
         });
         window.addEventListener('load', hidePreloader);
         function createStars() {
@@ -116,8 +116,6 @@
                 }
             }
         }
-       ස
-
         createStars();
         window.addEventListener('load', () => {
             if (typeof particlesJS !== 'undefined' && window.location.pathname === '/') {
