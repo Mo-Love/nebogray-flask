@@ -332,3 +332,10 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     .navbar-text { display: none; }
     .team-img { max-width: 100%; }
 }
+/* Fallback для супутника — hover-рух */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ... (решта CSS без змін) ... */
