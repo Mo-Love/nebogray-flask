@@ -1,41 +1,44 @@
 :root {
-    --bg-color: #000;
+    --bg-color: #000; /* Темний як Starlink */
     --text-color: #fff;
-    --card-bg: #111;
+    --card-bg: rgba(17, 17, 17, 0.6); /* Напівпрозорий як glassmorphism */
     --accent-color: #fff;
-    --starlink-glow: #00bfff; /* Блакитний неон для Starlink */
-    --shadow: 0 8px 16px rgba(255,255,255,0.1);
+    --starlink-glow: #00bfff; /* Блакитний акцент */
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Blur-тінь для прозорості */
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --gradient-bg: linear-gradient(135deg, #000 0%, #0a0a0a 50%, #000 100%); /* Космічний градієнт як на Grok */
 }
 
 [data-theme="light"] {
     --bg-color: #fff;
     --text-color: #000;
-    --card-bg: #f8f9fa;
+    --card-bg: rgba(248, 249, 250, 0.8);
     --accent-color: #000;
     --starlink-glow: #00bfff;
-    --shadow: 0 8px 16px rgba(0,0,0,0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--bg-color);
+    background: var(--gradient-bg); /* Градієнтний фон */
     color: var(--text-color);
     transition: var(--transition);
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Для анімацій */
+    overflow-x: hidden;
+    backdrop-filter: blur(10px); /* Напівпрозорий blur для Grok-вайбу */
 }
 
-/* Підсвічене меню */
+/* Меню — строгіший, з прозорістю */
 .navbar {
-    background: var(--card-bg) !important;
-    box-shadow: var(--shadow), 0 0 20px var(--starlink-glow); /* Неоновий glow */
+    background: rgba(0, 0, 0, 0.8) !important; /* Напівпрозорий */
+    box-shadow: var(--shadow), 0 0 20px var(--starlink-glow);
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid var(--text-color);
-    animation: navbarGlow 2s ease-in-out infinite alternate; /* Пульсація */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Легкий border */
+    animation: navbarGlow 2s ease-in-out infinite alternate;
+    backdrop-filter: blur(20px); /* Blur для прозорості */
 }
 
 @keyframes navbarGlow {
@@ -48,7 +51,7 @@ body {
     font-weight: 700;
     font-size: 1.8rem;
     color: var(--accent-color) !important;
-    text-shadow: 0 0 10px var(--starlink-glow); /* Glow на лого */
+    text-shadow: 0 0 10px var(--starlink-glow);
 }
 
 .nav-link {
@@ -62,71 +65,18 @@ body {
 
 .nav-link:hover, .nav-link.active {
     color: var(--starlink-glow) !important;
-    background: rgba(0, 191, 255, 0.1); /* Легкий фон */
+    background: rgba(0, 191, 255, 0.1); /* Прозорий акцент */
     text-shadow: 0 0 15px var(--starlink-glow);
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--starlink-glow);
 }
 
-/* Космічні анімації: Зірковий фон */
-.starry-bg {
-    position: relative;
-    background: var(--bg-color);
-    overflow: hidden;
-}
-
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.star {
-    position: absolute;
-    background: var(--accent-color);
-    border-radius: 50%;
-    animation: twinkle 2s infinite alternate, fall 10s linear infinite;
-}
-
-@keyframes twinkle {
-    0% { opacity: 0.5; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1.2); }
-}
-
-@keyframes fall {
-    0% { transform: translateY(-100vh) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(360deg); }
-}
-
-/* Орбіта супутника */
-.satellite-orbit {
-    position: relative;
-    display: inline-block;
-}
-
-.satellite {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    animation: orbit 8s linear infinite;
-}
-
-@keyframes orbit {
-    0% { transform: translateX(-50%) rotate(0deg) translateX(100px) rotate(0deg); }
-    100% { transform: translateX(-50%) rotate(360deg) translateX(100px) rotate(-360deg); }
-}
-
-/* Заголовок з анімацією */
+/* Хедер — строгий, з градієнтом */
 .header {
     padding: 4rem 0;
     text-align: center;
-    background: var(--bg-color);
-    position: relative; /* Для overlay анімацій */
+    background: var(--gradient-bg);
+    position: relative;
 }
 
 .animated-title {
@@ -140,35 +90,30 @@ body {
     border-right: 3px solid var(--accent-color);
     animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
     margin: 0 auto;
-    /* Прибрано text-shadow для чистоти */
 }
 
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--accent-color); }
-}
-
+/* Карточки — напівпрозорі, як на Starlink */
 .card {
     border: none;
+    background: var(--card-bg);
     box-shadow: var(--shadow);
     transition: var(--transition);
-    background: var(--card-bg);
     color: var(--text-color);
+    backdrop-filter: blur(10px); /* Прозорий blur */
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px var(--starlink-glow); /* Космічний glow на hover */
+    box-shadow: 0 0 20px var(--starlink-glow);
+    background: rgba(17, 17, 17, 0.8); /* Більш прозорий на hover */
 }
 
 .stats-card {
     text-align: center;
     padding: 2rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
 }
 
 .count {
@@ -179,98 +124,43 @@ body {
 }
 
 footer {
-    background: var(--card-bg);
+    background: rgba(0, 0, 0, 0.8); /* Прозорий футер */
     color: var(--text-color);
     padding: 2rem 0;
     text-align: center;
-    border-top: 1px solid var(--text-color);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .section {
     animation: fadeInUp 0.8s ease-out;
 }
 
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    background: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--text-color);
-    box-shadow: 0 0 10px var(--starlink-glow);
-}
-
-img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Мобільна */
-@media (max-width: 768px) {
-    .animated-title { 
-        font-size: 1.6rem;
-        white-space: normal;
-        word-break: break-all;
-    }
-    .count { font-size: 2rem; }
-    .navbar { animation: none; } /* Вимикаємо пульсацію на мобільному для продуктивності */
-    .star { animation-duration: 15s; } /* Повільніше на мобільному */
-}
-/* Стилі для каруселі — зменшена висота для кращого вписування */
+/* Карусель — строга, з прозорістю */
 .carousel-item img {
-    height: 250px; /* Зменшено з 300px */
+    height: 250px;
     object-fit: cover;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
 }
 
 .carousel-item img:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px #00bfff;
+    box-shadow: 0 0 20px var(--starlink-glow);
 }
 
 .carousel-caption {
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.7); /* Напівпрозорий */
     border-radius: 5px;
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    filter: invert(1);
-}
-
-.carousel-indicators [data-bs-target] {
-    background-color: #00bfff;
-}
-
-/* Мобільний — ще менша висота */
+/* Мобільна адаптація */
 @media (max-width: 768px) {
-    .carousel-item img { height: 150px; } /* Зменшено з 200px */
-    .carousel-caption { display: none; }
-}
-/* Стилі для фото команди в "Про нас" */
-.team-img {
-    max-width: 600px; /* Компактний розмір для вписування */
-    box-shadow: var(--shadow); /* Тінь з теми */
-    border-radius: 8px; /* Закруглені кути */
-    transition: var(--transition);
-}
-
-.team-img:hover {
-    transform: scale(1.02); /* Легкий зум на hover */
-    box-shadow: 0 0 20px var(--starlink-glow); /* Блакитний glow для акценту */
-}
-
-/* Мобільний — фото повна ширина */
-@media (max-width: 768px) {
-    .team-img { max-width: 100%; }
+    .animated-title { font-size: 1.6rem; white-space: normal; word-break: break-all; }
+    .count { font-size: 2rem; }
+    .navbar { animation: none; }
+    .carousel-item img { height: 150px; }
 }
