@@ -1,131 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Небограй – Професійний ремонт STARLINK{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{% block title %}Ремонт Starlink в Україні | Діагностика, Кабель, Dishy - Nebogray Repair{% endblock %}</title>
+    
+    <meta name="description" content="Професійний ремонт Starlink в Україні. Відновлення кабелю, блоків живлення та Dishy Gen1/Gen2. Безкоштовна діагностика та гарантія 6 місяців.">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    
+    {% block head_extra %}{% endblock %}
 </head>
-<body data-theme="dark">  <!-- Темна тема за замовчуванням, без перемикача -->
-    <!-- Прелоадер — 2с, пульсує -->
-    <div id="preloader" class="preloader">
-        <img src="{{ url_for('static', filename='IMG_0093.gif') }}" alt="Завантаження..." class="preloader-img">
-    </div>
+<body>
+    {% include 'header.html' %} 
 
-    <!-- Navbar з написом "Небограй" -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='Nebogray-Logo-BLK-150x150.jpg') }}" alt="Небограй Лого" class="navbar-logo me-2">
-                <span class="navbar-text">Небограй</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="/"><i class="fas fa-home"></i> Головна</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="/about"><i class="fas fa-info-circle"></i> Про нас</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'contacts' %}active{% endif %}" href="/contacts"><i class="fas fa-phone"></i> Контакти</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.endpoint == 'thanks' %}active{% endif %}" href="/thanks"><i class="fas fa-star"></i> Подяки</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <header class="header starry-bg text-center" id="home">
-        <div class="stars" id="stars"></div>
-        <div class="container">
-            {% block header %}
-            <div class="hero-content">
-                <div class="satellite-orbit">
-                    <i class="fas fa-satellite satellite"></i>
-                    <h1 class="animated-title">Професійний ремонт та<br>переобладнання терміналів<br>STARLINK під ваше авто</h1>
-                </div>
-                <p class="hero-subtitle fade-in">Швидкий сервіс для стабільного інтернету в дорозі</p>
-                <a href="/contacts" class="btn btn-primary btn-lg hero-cta fade-in">Замовити переобладнання</a>
-            </div>
-            {% endblock %}
-        </div>
-    </header>
-    <main class="container my-5 mt-5 pt-5">
+    <main class="container-fluid">
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Небограй. Всі права захищено.</p>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% include 'footer.html' %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script>
-        // DOM ready
-        document.addEventListener('DOMContentLoaded', function() {
-            // Прелоадер — 2с, пульсація в CSS
-            setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                if (preloader) {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 300);
-                }
-            }, 2000);
-
-            // Анімація лічильників
-            function animateCounters() {
-                const counters = document.querySelectorAll('.count');
-                counters.forEach(counter => {
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    const increment = target / 50;
-                    let current = 0;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            current = target;
-                            clearInterval(timer);
-                            counter.innerHTML = '> ' + current.toLocaleString();
-                        } else {
-                            counter.textContent = Math.floor(current).toLocaleString();
-                        }
-                    }, 40);
-                });
-            }
-            if (document.getElementById('stats')) animateCounters();
-
-            // Зірки
-            function createStars() {
-                const starsContainer = document.getElementById('stars');
-                if (!starsContainer) return;
-                const num = window.innerWidth > 768 ? 30 : 20;
-                for (let i = 0; i < num; i++) {
-                    const star = document.createElement('div');
-                    star.className = 'star';
-                    star.style.left = Math.random() * 100 + '%';
-                    star.style.top = Math.random() * 100 + '%';
-                    star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
-                    star.style.animationDelay = Math.random() * 10 + 's';
-                    star.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                    starsContainer.appendChild(star);
-                }
-            }
-            createStars();
-
-            // Smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-
-            // Дебаг
-            const navbarText = document.querySelector('.navbar-text');
-            if (navbarText) console.log('Navbar text loaded: Небограй');
-            const satellite = document.querySelector('.satellite');
-            if (satellite) console.log('Satellite loaded and animated');
-        });
+        new WOW().init();
     </script>
+    
+    {% block scripts %}{% endblock %}
 </body>
 </html>
