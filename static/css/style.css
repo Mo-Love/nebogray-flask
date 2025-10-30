@@ -1,8 +1,50 @@
-/* Прелоадер — 2с, пульсація */
+:root {
+    --bg-color: #000;
+    --text-color: #fff;
+    --card-bg: #111;
+    --accent-color: #fff;
+    --starlink-glow: #00bfff;
+    --shadow: 0 8px 16px rgba(255,255,255,0.1);
+    --transition: all 0.3s cubic-bezier(0,0,0.2,1);
+}
+
+[data-theme="light"] {
+    --bg-color: #fff;
+    --text-color: #000;
+    --card-bg: #f8f9fa;
+    --accent-color: #000;
+    --starlink-glow: #00bfff;
+    --shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: var(--transition);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease-out;
+}
+
 .preloader-img {
     max-width: 200px;
     max-height: 200px;
-    animation: pulse 1s ease-in-out infinite;  /* Пульсація (scale 1 -> 1.2) */
+    animation: pulse 1s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -11,7 +53,22 @@
     100% { transform: scale(1); }
 }
 
-/* Navbar текст "Небограй" */
+.navbar {
+    background: var(--card-bg) !important;
+    box-shadow: var(--shadow), 0 0 20px var(--starlink-glow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--text-color);
+    animation: navbarGlow 2s ease-in-out infinite alternate;
+}
+
+.navbar-logo {
+    height: 40px;
+    width: auto;
+    transition: var(--transition);
+}
+
 .navbar-text {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -23,34 +80,126 @@
     margin-left: 0.5rem;
 }
 
+.navbar-brand:hover .navbar-logo,
 .navbar-brand:hover .navbar-text {
     transform: scale(1.05);
-    text-shadow: 0 0 15px var(--starlink-glow);
+    filter: drop-shadow(0 0 10px var(--starlink-glow));
 }
 
-/* Кнопка зміни теми */
-.theme-toggle {
-    position: fixed !important;
-    top: 20px;
-    right: 20px;
-    z-index: 2000;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    background: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--text-color);
-    box-shadow: 0 0 10px var(--starlink-glow);
+@keyframes navbarGlow {
+    from { box-shadow: var(--shadow), 0 0 20px var(--starlink-glow); }
+    to { box-shadow: var(--shadow), 0 0 30px var(--starlink-glow); }
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--text-color) !important;
     transition: var(--transition);
-    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin: 0 0.25rem;
 }
 
-.theme-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px var(--starlink-glow);
+.nav-link:hover, .nav-link.active {
+    color: var(--starlink-glow) !important;
+    background: rgba(0, 191, 255, 0.1);
+    text-shadow: 0 0 15px var(--starlink-glow);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--starlink-glow);
 }
 
-/* Супутник — орбіта */
+.header {
+    padding: 2rem 0;
+    text-align: center;
+    background: linear-gradient(to bottom, var(--bg-color), rgba(0, 191, 255, 0.1));
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-attachment: fixed;
+}
+
+.hero-content {
+    animation: fadeInUp 1s ease-out;
+    z-index: 2;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin: 1rem 0 2rem;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 0.5s forwards;
+}
+
+.hero-cta {
+    background: var(--starlink-glow);
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 1s forwards;
+    transition: transform 0.3s;
+}
+
+.hero-cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--starlink-glow);
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.animated-title {
+    animation: fadeInUp 1s ease-out;
+    white-space: pre-line;
+    line-height: 1.2;
+    font-size: 2rem;
+}
+
+.starry-bg {
+    position: relative;
+    background: var(--bg-color);
+    overflow: hidden;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate, fall 8s linear infinite;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
 .satellite-orbit {
     position: relative;
     display: inline-block;
@@ -63,29 +212,144 @@
     transition: animation-duration 0.3s;
 }
 
+@keyframes orbit {
+    0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+
 .satellite:hover {
     animation-duration: 2s;
     filter: drop-shadow(0 0 10px var(--starlink-glow));
 }
 
-/* Зірки — фікс анімації */
-.star {
-    position: absolute;
-    background: var(--accent-color);
-    border-radius: 50%;
-    animation: twinkle 2s infinite alternate, fall 8s linear infinite !important;  /* Фікс: примусово застосовуємо */
+.card {
+    border: none;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    background: var(--card-bg);
+    color: var(--text-color);
+    overflow: hidden;
 }
 
-/* ... (решта CSS без змін) ... */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--starlink-glow);
+}
 
-/* Мобільний — фікс меню (bootstrap default) */
+.stats-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.count {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--starlink-glow);
+}
+
+footer {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid var(--text-color);
+}
+
+.section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    box-shadow: 0 0 10px var(--starlink-glow);
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--starlink-glow);
+}
+
+img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.carousel-item img {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.carousel-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00bfff;
+}
+
+.carousel-caption {
+    background: rgba(0,0,0,0.5);
+    border-radius: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #00bfff;
+}
+
+.me-2 {
+    margin-left: 0.5rem;
+}
+
+.team-img {
+    max-width: 600px;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.team-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px var(--starlink-glow);
+}
+
 @media (max-width: 768px) {
-    .navbar-collapse {
-        background: var(--card-bg);
-        padding: 1rem;
-        border-top: 1px solid var(--text-color);
+    .animated-title { 
+        font-size: 1.4rem;
+        line-height: 1.1;
     }
-    .nav-link {
-        text-align: center;
-    }
+    .count { font-size: 2rem; }
+    .navbar { animation: none; }
+    .star { animation-duration: 15s; }
+    .carousel-item img { height: 150px; }
+    .carousel-caption { display: none; }
+    .header { min-height: 50vh; }
+    .navbar-logo { height: 30px; }
+    .navbar-text { display: none; }
+    .theme-toggle { top: 10px; right: 10px; }  /* Фікс зміщення на мобільному */
+    .satellite { animation-duration: 3s; }  /* Швидше на мобільному */
 }
