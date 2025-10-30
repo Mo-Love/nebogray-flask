@@ -5,16 +5,7 @@
     --accent-color: #fff;
     --starlink-glow: #00bfff;
     --shadow: 0 8px 16px rgba(255,255,255,0.1);
-    --transition: all 0.3s cubic-bezier(0,0,0.2,1);
-}
-
-[data-theme="light"] {
-    --bg-color: #fff;
-    --text-color: #000;
-    --card-bg: #f8f9fa;
-    --accent-color: #000;
-    --starlink-glow: #00bfff;
-    --shadow: 0 8px 16px rgba(0,0,0,0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -260,26 +251,6 @@ footer {
     animation: fadeInUp 0.8s ease-out;
 }
 
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 2000;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    background: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--text-color);
-    box-shadow: 0 0 10px var(--starlink-glow);
-    transition: var(--transition);
-}
-
-.theme-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px var(--starlink-glow);
-}
-
 img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
 
 @keyframes fadeInUp {
@@ -349,7 +320,7 @@ img { max-width: 100%; height: auto; border-radius: 8px; loading: lazy; }
     .carousel-caption { display: none; }
     .header { min-height: 50vh; }
     .navbar-logo { height: 30px; }
-    .navbar-text { display: none; }
-    .theme-toggle { top: 10px; right: 10px; }  /* Фікс зміщення на мобільному */
-    .satellite { animation-duration: 3s; }  /* Швидше на мобільному */
+    .navbar-text { display: none; }  /* Ховаємо напис на мобільному */
+    .theme-toggle { top: 10px; right: 10px; }  /* Компактно на мобільному */
+    .satellite { animation-duration: 3s; }
 }
