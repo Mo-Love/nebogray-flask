@@ -1,33 +1,40 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Контакти - Небограй{% endblock %}
+{% block title %}Контакти для Ремонту Starlink | Nebogray Repair{% endblock %}
 
 {% block content %}
-<section class="row section">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h2>Адреса</h2>
-                <p>{{ contacts.address }}</p>
-                <h2>Телефон</h2>
-                <p><a href="tel:{{ contacts.phone }}" class="text-white">{{ contacts.phone }}</a></p>
-                <h2>Email</h2>
-                <p><a href="mailto:{{ contacts.email }}" class="text-white">{{ contacts.email }}</a></p>
-            </div>
+<div class="container py-5">
+    <h1 class="fw-bold">Зв'яжіться з Нами для Ремонту Starlink</h1>
+    <hr>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <h3 class="fw-bold text-primary">Форма Заявки на Діагностику</h3>
+            <p>Залиште свої дані для початку **ремонту Starlink**.</p>
+            
+            {% include 'contact_form.html' %} 
+            
+        </div>
+        <div class="col-md-6 mb-4">
+            <h3 class="fw-bold mt-4 text-primary">Наші Контактні Дані (Starlink в Україні)</h3>
+            <p><i class="bi bi-geo-alt-fill text-secondary me-2"></i> Адреса для відправлення: Київ, Відділення НП #XXX</p>
+            <p><i class="bi bi-phone-fill text-secondary me-2"></i> Телефон: <a href="tel:+380XXXXXXXXX">+380 ХХХ ХХХ ХХ ХХ</a></p>
+            <p><i class="bi bi-envelope-fill text-secondary me-2"></i> Email: <a href="mailto:info@nebograyrepair.com">info@nebograyrepair.com</a></p>
+            
+            <h3 class="fw-bold mt-4 text-primary">Месенджери</h3>
+            <p>
+                <a href="https://t.me/yourtelegram" target="_blank" class="btn btn-outline-info me-2"><i class="bi bi-telegram"></i> Telegram</a>
+                <a href="https://viber.com/yourviber" target="_blank" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i> WhatsApp/Viber</a>
+            </p>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h2>Зв'яжіться з нами</h2>
-                <form>
-                    <input type="text" class="form-control mb-2" placeholder="Ім'я">
-                    <input type="email" class="form-control mb-2" placeholder="Email">
-                    <textarea class="form-control mb-2" placeholder="Повідомлення"></textarea>
-                    <button type="submit" class="btn btn-outline-light">Відправити</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+</div>
 {% endblock %}
