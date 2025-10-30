@@ -1,141 +1,222 @@
-{% extends 'base.html' %}
-
-{% block header %}
-<div class="hero-content">
-    <div class="satellite-orbit">
-        <i class="fas fa-satellite satellite"></i>
-        <h1 class="animated-title">Професійний ремонт та<br>переобладнання терміналів<br>STARLINK під ваше авто</h1>
-    </div>
-    <p class="hero-subtitle fade-in">Швидкий сервіс для стабільного інтернету в дорозі</p>
-    <a href="/contacts" class="btn btn-primary btn-lg hero-cta fade-in">Замовити переобладнання</a>
-</div>
-{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-<!-- Статистика -->
-<section id="stats" class="row mb-5 g-4 text-center section">
-    <div class="col-md-6">
-        <div class="card stats-card bg-secondary text-white">
-            <div class="card-body">
-                <h2><i class="fas fa-tools"></i> Переобладнано:</h2>
-                <div class="count" data-target="{{ stats.reobladnano }}">> {{ stats.reobladnano }}</div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+                {% endfor %}
             </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card stats-card bg-secondary text-white">
-            <div class="card-body">
-                <h2><i class="fas fa-wrench"></i> Відремонтовано:</h2>
-                <div class="count" data-target="{{ stats.vidremontovano }}">> {{ stats.vidremontovano }}</div>
+        {% endif %}
+    {% endwith %}
+
+
+<section class="py-5 text-center bg-light" id="hero">
+    <div class="container">
+        <div class="row py-lg-5">
+            <div class="col-lg-10 col-md-12 mx-auto">
+                <h1 class="display-4 fw-bold text-dark mb-3 wow animate__animated animate__fadeInDown">
+                    Професійний Ремонт Starlink в Україні: Швидко, Надійно, З Гарантією.
+                </h1>
+                <p class="lead text-muted mb-4 wow animate__animated animate__fadeInDown" data-wow-delay="0.3s">
+                    Ми відновлюємо працездатність **Dishy**, кабелів (**Cable Lock**) та блоків живлення Gen1/Gen2. 
+                    <span class="fw-bold text-primary">Безкоштовна діагностика Starlink за 24 години.</span>
+                </p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
+                    <a href="#" class="btn btn-primary btn-lg px-4 gap-3 shadow-lg wow animate__animated animate__pulse animate__infinite" data-bs-toggle="modal" data-bs-target="#contactModal">
+                        ЗАМОВИТИ ДІАГНОСТИКУ (Telegram/Viber) 🚀
+                    </a>
+                </div>
+                <p class="text-secondary wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+                    Довіряють приватні клієнти, бізнес та ЗСУ.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Послуги -->
-<section class="row mb-5 section">
-    {% for service in services %}
-    <div class="col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-header bg-dark text-white">
-                <h5>{{ service.title }}</h5>
+<section class="py-5" id="painpoints">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold wow animate__animated animate__fadeInUp">
+            Типові Проблеми Starlink, Які Ми Вирішуємо
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-4 wow animate__animated animate__fadeInLeft">
+                <div class="p-4 border rounded-3 h-100 shadow-sm bg-warning-subtle">
+                    <i class="bi bi-lightning-fill text-danger fs-3 mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Ремонт Кабелю Starlink (Cable Lock)</h3>
+                    <p class="text-muted">Найпоширеніша проблема. Професійно відновлюємо пошкоджені жили та конектори без втрати герметичності.</p>
+                </div>
             </div>
-            <div class="card-body">
-                <p>{{ service.description }}</p>
-                <button class="btn btn-outline-light" data-bs-toggle="collapse" data-bs-target="#details{{ loop.index }}">Деталі</button>
-                <div class="collapse mt-3" id="details{{ loop.index }}">
-                    <ul class="list-group list-group-flush">
-                        {% for detail in service.details %}
-                        <li class="list-group-item bg-transparent text-white"><i class="fas fa-check"></i> {{ detail }}</li>
-                        {% endfor %}
-                    </ul>
+            <div class="col-md-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                <div class="p-4 border rounded-3 h-100 shadow-sm bg-warning-subtle">
+                    <i class="bi bi-power text-danger fs-3 mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Діагностика та Ремонт Блоків Живлення</h3>
+                    <p class="text-muted">Dishy не вмикається, постійно перезавантажується або видає помилку "Booting". Ремонт внутрішніх електронних компонентів.</p>
                 </div>
-                <!-- Карусель 1 (переобладнання) -->
-                {% if loop.index == 1 %}
-                <div id="carouselServices1" class="carousel slide mt-3" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="1" class="active" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="2" class="active" aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselServices1" data-bs-slide-to="3" class="active" aria-label="Slide 4"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ url_for('static', filename='images/pid_avto_starlink.jpg') }}" class="d-block w-100" alt="Starlink під авто" loading="lazy">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/starlink_avtopererobka.jpg') }}" class="d-block w-100" class="d-block w-100" alt="Автопереробка Starlink" loading="lazy">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/starlink_dlya_avto.jpg') }}" class="d-block w-100" alt="Starlink для авто" loading="lazy">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/starlink_pid_avto.jpg') }}" class="d-block w-100" alt="Starlink під авто" loading="lazy">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselServices1" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselServices1" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+            </div>
+            <div class="col-md-4 wow animate__animated animate__fadeInRight">
+                <div class="p-4 border rounded-3 h-100 shadow-sm bg-warning-subtle">
+                    <i class="bi bi-compass-fill text-danger fs-3 mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Ремонт Механізму Наведення Dishy</h3>
+                    <p class="text-muted">Термінал застряг у положенні "Stowed" або не може знайти супутники. Ремонт або заміна моторів та датчиків Starlink.</p>
                 </div>
-                {% endif %}
-                <!-- Карусель 2 (ремонт) -->
-                {% if loop.index == 2 %}
-                <div id="carouselServices2" class="carousel slide mt-3" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselServices2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ url_for('static', filename='images/pererobka_rozyemu_starlink_rj45.jpg') }}" class="d-block w-100" alt="Переробка роз'єму Starlink RJ45" loading="lazy">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/remont_poshkodjenoyi_plati_starlink.jpg') }}" class="d-block w-100" alt="Ремонт пошкодженої плати Starlink" loading="lazy">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/zamina_korpusu_starlink.jpg') }}" class="d-block w-100" alt="Заміна корпусу Starlink" loading="lazy">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselServices2" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselServices2" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>
-    {% endfor %}
 </section>
 
-<!-- Відгуки -->
-<section id="reviews" class="row mb-5 section">
-    <h2 class="col-12 mb-4 text-center">Відгуки клієнтів</h2>
-    <div class="accordion" id="reviewsAccordion">
-        {% for review in reviews %}
-        <div class="accordion-item bg-transparent border-light">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#review{{ loop.index }}">
-                    {{ review.author }}
-                </button>
-            </h2>
-            <div id="review{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#reviewsAccordion">
-                <div class="accordion-body bg-secondary text-white">
-                    {{ review.text }}
+<section class="py-5 bg-light" id="process">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold wow animate__animated animate__fadeInUp">
+            Процес Ремонту Starlink: Просто та Прозоро (4 Кроки)
+        </h2>
+        <div class="row text-center">
+            <div class="col-lg-3 mb-4 wow animate__animated animate__fadeInUp">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <h3 class="display-6 text-primary">1</h3>
+                    <p class="fw-bold">Заявка та Відправлення</p>
+                    <p class="text-muted small">Зв'яжіться з нами, щоб отримати інструкції для безпечної відправки.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <h3 class="display-6 text-primary">2</h3>
+                    <p class="fw-bold">Безкоштовна Діагностика Starlink</p>
+                    <p class="text-muted small">Протягом 24 годин: звіт про несправність та фіксована вартість ремонту.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <h3 class="display-6 text-primary">3</h3>
+                    <p class="fw-bold">Ремонт Dishy та Тестування</p>
+                    <p class="text-muted small">Виконання робіт (1-3 дні) та обов'язкове тестування на спеціальному стенді.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+                <div class="p-3 border rounded-3 bg-white h-100">
+                    <h3 class="display-6 text-primary">4</h3>
+                    <p class="fw-bold">Оплата та Гарантія</p>
+                    <p class="text-muted small">Оплата після успішного ремонту, отримання Starlink та гарантії (6 міс.).</p>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
 </section>
+
+<section class="py-5" id="benefits">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold wow animate__animated animate__fadeInUp">
+            Чому Ремонт Starlink варто довірити нам?
+        </h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col wow animate__animated animate__fadeInLeft">
+                <div class="d-flex align-items-start p-3 rounded-3 shadow-sm border-primary">
+                    <i class="bi bi-shield-fill-check text-success fs-3 me-3"></i>
+                    <div>
+                        <h4 class="fw-bold">Гарантія 6 Місяців на Ремонт</h4>
+                        <p class="text-muted mb-0">Надаємо офіційну гарантію на всі виконані роботи та замінені компоненти, підтверджуючи якість ремонту **Starlink в Україні**.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col wow animate__animated animate__fadeInRight">
+                <div class="d-flex align-items-start p-3 rounded-3 shadow-sm border-primary">
+                    <i class="bi bi-box-seam-fill text-success fs-3 me-3"></i>
+                    <div>
+                        <h4 class="fw-bold">Власна База Запчастин</h4>
+                        <p class="text-muted mb-0">Постійний запас оригінальних комплектуючих дозволяє ремонтувати швидше за конкурентів.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col wow animate__animated animate__fadeInLeft" data-wow-delay="0.2s">
+                <div class="d-flex align-items-start p-3 rounded-3 shadow-sm border-primary">
+                    <i class="bi bi-tools text-success fs-3 me-3"></i>
+                    <div>
+                        <h4 class="fw-bold">Спеціалізоване Обладнання</h4>
+                        <p class="text-muted mb-0">Діагностика та ремонт проводяться на стендах, призначених для електроніки Starlink.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col wow animate__animated animate__fadeInRight" data-wow-delay="0.2s">
+                <div class="d-flex align-items-start p-3 rounded-3 shadow-sm border-primary">
+                    <i class="bi bi-person-workspace text-success fs-3 me-3"></i>
+                    <div>
+                        <h4 class="fw-bold">Фокус на Starlink</h4>
+                        <p class="text-muted mb-0">Наша експертиза 100% сфокусована на терміналах Starlink Gen 1 і Gen 2.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light" id="faq">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold wow animate__animated animate__fadeInUp">
+            Часті Запитання про Ремонт Starlink (FAQ)
+        </h2>
+        <div class="accordion wow animate__animated animate__fadeInUp" id="faqAccordion" data-wow-delay="0.4s">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Скільки коштує діагностика?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Діагностика несправності Starlink **абсолютно безкоштовна**, навіть якщо ви вирішите не ремонтувати пристрій у нас.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Який середній термін ремонту?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Завдяки наявності запчастин, стандартний ремонт займає **від 1 до 3 робочих днів** після отримання терміналу.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Які моделі Starlink ви ремонтуєте?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Ми працюємо з усіма моделями: Starlink Standard (Gen1, Gen2) та Starlink Flat High Performance.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-primary text-white text-center" id="final-cta">
+    <div class="container">
+        <h2 class="fw-bold mb-3 wow animate__animated animate__fadeInUp">
+            Не зволікайте! Зв'яжіться з нами – Ваш Starlink знову запрацює!
+        </h2>
+        <p class="lead mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+            Залиште заявку, і ми проведемо безкоштовну діагностику вашого терміналу.
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="#" class="btn btn-light btn-lg shadow-lg wow animate__animated animate__tada" data-bs-toggle="modal" data-bs-target="#contactModal">
+                Отримати Консультацію
+            </a>
+            <a href="https://t.me/yourtelegram" target="_blank" class="btn btn-outline-light btn-lg shadow-lg wow animate__animated animate__tada" data-wow-delay="0.4s">
+                Написати у Telegram 💬
+            </a>
+        </div>
+    </div>
+</section>
+
+{% include 'contact_modal.html' %} 
+
 {% endblock %}
