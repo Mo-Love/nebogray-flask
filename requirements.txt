@@ -1,5 +1,5 @@
 Flask==3.0.3
-Flask-WTF==1.2.1
 Flask-Mail==0.9.1
+Flask-WTF==1.2.1
 gunicorn==21.2.0
-# Додай інші, якщо є (наприклад, requests==2.31.0)
+# Без зайвого! Якщо є інші — pip freeze додасть.
